@@ -44,5 +44,7 @@ COPY --from=builder /app/prisma ./prisma
 # 本番環境設定
 ENV NODE_ENV=production
 
-# アプリケーションを起動
+# Cloud Run は自動で $PORT を注入するため、EXPOSE 8080 にしておく
+EXPOSE 8080
+
 CMD ["node", "dist/app.js"]
