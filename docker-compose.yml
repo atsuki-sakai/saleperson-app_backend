@@ -4,10 +4,12 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "3000:8080"  # ローカルの3000番ポートをコンテナの8080番ポートにマッピング
     environment:
-      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@cloudsql:5432/${DB_NAME}
+      # Cloud SQL Proxy経由でのデータベース接続
+      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@cloudsql:5432/saleperson-app-db
       - NODE_ENV=development
+      - PORT=8080
     networks:
       - app-network
     depends_on:

@@ -4,36 +4,29 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Build
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
 dist/
 build/
 
-# Environment
-.env
-.env.*
-!.env.example
-
-# IDE
+# IDE and editor files
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# Logs
-logs/
-*.log
-
-# Cloud SQL Auth Proxy
-cloud-sql-proxy
-
-# Credentials
-credentials.json
-*.pem
-*.key
-
-# Prisma
-.prisma/
-
-# OS
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# Cloud SQL Proxy credentials
+credentials.json

@@ -36,6 +36,8 @@ steps:
       - '$PROJECT_ID:asia-northeast1:saleperson-app-db'
       - '--set-env-vars'
       - 'NODE_ENV=production'
+      - '--set-secrets'
+      - 'DB_PASSWORD=db-password:latest'
       - '--service-account'
       - 'salesperson-backend-sa@$PROJECT_ID.iam.gserviceaccount.com'
     id: 'deploy'

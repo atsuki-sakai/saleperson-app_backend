@@ -2,7 +2,7 @@
 ├── src/
 │   ├── config/
 │   │   ├── database.ts
-│   │   └── environment.ts
+│   │   
 │   ├── controllers/
 │   │   └── index.ts
 │   ├── models/

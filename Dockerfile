@@ -41,11 +41,8 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/prisma ./prisma
 
-# ポフォルトの環境変数を設定
-ENV NODE_ENV=production \
-    PORT=3000
-
-EXPOSE 3000
+# 本番環境設定
+ENV NODE_ENV=production
 
 # アプリケーションを起動
 CMD ["node", "dist/app.js"]
