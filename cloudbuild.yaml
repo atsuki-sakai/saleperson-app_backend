@@ -34,8 +34,6 @@ steps:
       - '$PROJECT_ID:asia-northeast1:saleperson-app-db'
       - '--set-env-vars'
       - 'NODE_ENV=production'
-      - '--set-secrets'
-      - 'DATABASE_URL=postgresql://postgres:Heisei50721@localhost:5432/saleperson-app-db'
       - '--service-account'
       - 'salesperson-backend-sa@$PROJECT_ID.iam.gserviceaccount.com'
     id: 'deploy'
