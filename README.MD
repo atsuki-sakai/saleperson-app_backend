@@ -2,6 +2,8 @@
 
 バックエンドAPIサーバー for Salesperson Application
 
+./cloud-sql-proxy --port 5432 saleperson-app:asia-northeast1:saleperson-app-db
+
 ## 技術スタック
 
 - Node.js

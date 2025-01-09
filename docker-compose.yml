@@ -1,40 +1,32 @@
-# version: '3.8'
-
-# services:
-#   app:
-#     build: .
-#     ports:
-#       - "3000:3000"
-#     environment:
-#       # ここはローカル用設定例です
-#       # 実際にはホスト側のDBや、別途PostgreSQLコンテナを立ち上げるなどしてください
-#       - DATABASE_URL=postgresql://postgres:Heisei50721@localhost:5432/saleperson-app-db?schema=public
-#     networks:
-#       - app-network
-
-# networks:
-#   app-network:
-#     driver: bridge
-
-
-# -------------------------------------
-# docker-compose.yaml
-# -------------------------------------
+version: '3.8'
 
 services:
   app:
     build: .
     ports:
-      - "8080:8080"
-    volumes:
-      - .:/app
-      - ./saleperson-server_service_account.json:/app/saleperson-server_service_account.json
+      - "3000:3000"
     environment:
-      - CLOUD_SQL_CONNECTION_NAME=${CLOUD_SQL_CONNECTION_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
-      - DB_PORT=${DB_PORT}
-      - DATABASE_URL=${DATABASE_URL}
-      - GOOGLE_APPLICATION_CREDENTIALS=/app/saleperson-server_service_account.json
-      
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@cloudsql:5432/${DB_NAME}
+      - NODE_ENV=development
+    networks:
+      - app-network
+    depends_on:
+      - cloudsql
+
+  cloudsql:
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1
+    command:
+      - "--address=0.0.0.0"
+      - "--port=5432"
+      - "--credentials-file=/credentials.json"
+      - "${CLOUD_SQL_CONNECTION_NAME}"
+    volumes:
+      - ./credentials.json:/credentials.json
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

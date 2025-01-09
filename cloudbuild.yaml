@@ -3,10 +3,8 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
-      - '--platform'
-      - 'linux/amd64'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/salesperson-backend'
+      - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
       - '.'
     id: 'build-app'
 
@@ -14,7 +12,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/$PROJECT_ID/salesperson-backend'
+      - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
     id: 'push-image'
     waitFor: ['build-app']
 
@@ -26,24 +24,20 @@ steps:
       - 'deploy'
       - 'salesperson-backend'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/salesperson-backend'
+      - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
       - '--region'
       - 'asia-northeast1'
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
-      - '--port'
-      - '3000'
       - '--add-cloudsql-instances'
       - '$PROJECT_ID:asia-northeast1:saleperson-app-db'
       - '--set-env-vars'
-      - 'PORT=3000'
-      - '--set-env-vars'
       - 'NODE_ENV=production'
-      - '--set-env-vars'
-      - 'DATABASE_URL=postgresql://postgres:${_DB_PASSWORD}@localhost/saleperson-app-db?host=/cloudsql/$PROJECT_ID:asia-northeast1:saleperson-app-db'
+      - '--set-secrets'
+      - 'DATABASE_URL=postgresql://postgres:Heisei50721@localhost:5432/saleperson-app-db'
       - '--service-account'
-      - 'salesperson-backend-sa@saleperson-app.iam.gserviceaccount.com'
+      - 'salesperson-backend-sa@$PROJECT_ID.iam.gserviceaccount.com'
     id: 'deploy'
     waitFor: ['push-image']
 
@@ -52,13 +46,9 @@ timeout: '1800s'
 
 # ビルドされたイメージをArtifact Registryに保存
 images:
-  - 'gcr.io/$PROJECT_ID/salesperson-backend'
-
-# 環境変数の置換
-substitutions:
-  _DB_PASSWORD: Heisei50721
+  - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
 
 # オプション設定
 options:
   logging: CLOUD_LOGGING_ONLY
-  machineType: 'N1_HIGHCPU_8' 
+  machineType: 'N1_HIGHCPU_8'

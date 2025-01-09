@@ -19,10 +19,29 @@ app.use('/api', router);
 // エラーハンドリング
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
+// ヘルスチェックエンドポイント
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
-app.listen(PORT, () => {
+const PORT = parseInt(process.env.PORT || '3000', 10);
+
+// サーバー起動時のエラーハンドリングを追加
+const server = app.listen(PORT, '0.0.0.0', () => {
   logger.info(`Server is running on port ${PORT}`);
+  logger.info(`Database URL: ${process.env.DATABASE_URL}`);
+}).on('error', (err) => {
+  logger.error('Failed to start server:', err);
+  process.exit(1);
+});
+
+// グレースフルシャットダウンの処理
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM received. Shutting down gracefully...');
+  server.close(() => {
+    logger.info('Server closed');
+    process.exit(0);
+  });
 });
 
 export default app; 
