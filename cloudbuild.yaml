@@ -6,7 +6,7 @@ steps:
       - '--platform'
       - 'linux/amd64'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
+      - 'gcr.io/saleperson-app/salesperson-backend:$COMMIT_SHA'
       - '.'
     id: 'build-app'
 
@@ -14,7 +14,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
+      - 'gcr.io/saleperson-app/salesperson-backend:$COMMIT_SHA'
     id: 'push-image'
     waitFor: ['build-app']
 
@@ -26,16 +26,16 @@ steps:
       - 'deploy'
       - 'salesperson-backend'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
+      - 'gcr.io/saleperson-app/salesperson-backend:$COMMIT_SHA'
       - '--region'
       - 'asia-northeast1'
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
       - '--add-cloudsql-instances'
-      - '$PROJECT_ID:asia-northeast1:saleperson-app-db'
+      - 'saleperson-app:asia-northeast1:saleperson-app-db'
       - '--service-account'
-      - 'salesperson-backend-sa@$PROJECT_ID.iam.gserviceaccount.com'
+      - 'salesperson-backend-sa@saleperson-app.iam.gserviceaccount.com'
 
       # Secret Managerの `db-password` を環境変数 DB_PASSWORD に注入
       - '--set-secrets'
@@ -43,14 +43,14 @@ steps:
 
       # 他の環境変数 (プロジェクトID や DB名 など)
       - '--set-env-vars'
-      - 'NODE_ENV=production,PROJECT_ID=$PROJECT_ID,DB_NAME=saleperson-app-db'
+      - 'NODE_ENV=production,PROJECT_ID=saleperson-app,DB_NAME=saleperson-app-db'
     id: 'deploy'
     waitFor: ['push-image']
 
 timeout: '1800s'
 
 images:
-  - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
+  - 'gcr.io/saleperson-app/salesperson-backend:$COMMIT_SHA'
 
 options:
   logging: 'CLOUD_LOGGING_ONLY'

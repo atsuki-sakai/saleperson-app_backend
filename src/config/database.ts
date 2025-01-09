@@ -9,6 +9,7 @@ const CLOUD_SQL_CONNECTION_NAME = `${PROJECT_ID}:asia-northeast1:saleperson-app-
 // Cloud Run環境でのUnixソケット接続文字列
 export const DATABASE_URL = `postgresql://postgres:${DB_PASSWORD}@/${DB_NAME}?host=/cloudsql/${CLOUD_SQL_CONNECTION_NAME}`;
 
+console.log("Effective DATABASE_URL:", DATABASE_URL);
 // 設定のエクスポート
 export const dbConfig = {
     DATABASE_URL,

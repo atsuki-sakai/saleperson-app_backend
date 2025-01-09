@@ -24,7 +24,16 @@ app.get('/', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-const PORT = parseInt(process.env.PORT || '3000', 10);
+const PORT = parseInt(process.env.PORT || '8080', 10);
+
+// 例: app.ts など
+console.log("Effective DATABASE_URL:", process.env.DATABASE_URL);
+console.log("Effective PORT:", process.env.PORT);
+console.log("Effective NODE_ENV:", process.env.NODE_ENV);
+console.log("Effective PROJECT_ID:", process.env.PROJECT_ID);
+console.log("Effective DB_NAME:", process.env.DB_NAME);
+console.log("Connection Name:", process.env.CLOUD_SQL_CONNECTION_NAME);
+
 
 // サーバー起動時のエラーハンドリングを追加
 const server = app.listen(PORT, '0.0.0.0', () => {
