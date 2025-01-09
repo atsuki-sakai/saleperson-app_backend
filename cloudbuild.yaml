@@ -4,6 +4,8 @@ steps:
     args:
       - 'build'
       - '-t'
+      - '--platform'
+      - 'linux/amd64'
       - 'gcr.io/$PROJECT_ID/salesperson-backend:$COMMIT_SHA'
       - '.'
     id: 'build-app'
