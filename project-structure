@@ -1,0 +1,27 @@
+.
+├── src/
+│   ├── config/
+│   │   ├── database.ts
+│   │   └── environment.ts
+│   ├── controllers/
+│   │   └── index.ts
+│   ├── models/
+│   │   └── index.ts
+│   ├── routes/
+│   │   └── index.ts
+│   ├── services/
+│   │   └── index.ts
+│   ├── types/
+│   │   └── index.ts
+│   ├── utils/
+│   │   └── logger.ts
+│   └── app.ts
+├── tests/
+│   └── __tests__/
+├── .dockerignore
+├── .env.example
+├── .gitignore
+├── Dockerfile
+├── cloudbuild.yaml
+├── package.json
+└── tsconfig.json 

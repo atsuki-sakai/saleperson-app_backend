@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:Heisei50721@cloudsql:5432/saleperson-app-db?schema=public
+      - PORT=3000
+    networks:
+      - app-network
+    depends_on:
+      - cloudsql
+
+  cloudsql:
+    build:
+      context: .
+      dockerfile: Dockerfile.cloudsql
+    volumes:
+      - ./credentials.json:/credentials.json
+    networks:
+      - app-network
+    command:
+      - "--address=0.0.0.0"
+      - "--credentials-file=/credentials.json"
+      - "saleperson-app:asia-northeast1:saleperson-app-db"
+
+networks:
+  app-network:
+    driver: bridge
