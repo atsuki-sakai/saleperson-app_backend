@@ -1,5 +1,0 @@
-FROM gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1
-
-USER nonroot:nonroot
-
-ENTRYPOINT ["/cloud-sql-proxy"] 

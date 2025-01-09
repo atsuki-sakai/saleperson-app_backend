@@ -1,29 +1,40 @@
+# version: '3.8'
+
+# services:
+#   app:
+#     build: .
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       # ここはローカル用設定例です
+#       # 実際にはホスト側のDBや、別途PostgreSQLコンテナを立ち上げるなどしてください
+#       - DATABASE_URL=postgresql://postgres:Heisei50721@localhost:5432/saleperson-app-db?schema=public
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge
+
+
+# -------------------------------------
+# docker-compose.yaml
+# -------------------------------------
+
 services:
   app:
     build: .
     ports:
-      - "3000:3000"
-    environment:
-      - DATABASE_URL=postgresql://postgres:Heisei50721@cloudsql:5432/saleperson-app-db?schema=public
-      - PORT=3000
-    networks:
-      - app-network
-    depends_on:
-      - cloudsql
-
-  cloudsql:
-    build:
-      context: .
-      dockerfile: Dockerfile.cloudsql
+      - "8080:8080"
     volumes:
-      - ./credentials.json:/credentials.json
-    networks:
-      - app-network
-    command:
-      - "--address=0.0.0.0"
-      - "--credentials-file=/credentials.json"
-      - "saleperson-app:asia-northeast1:saleperson-app-db"
-
-networks:
-  app-network:
-    driver: bridge
+      - .:/app
+      - ./saleperson-server_service_account.json:/app/saleperson-server_service_account.json
+    environment:
+      - CLOUD_SQL_CONNECTION_NAME=${CLOUD_SQL_CONNECTION_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/saleperson-server_service_account.json
+      

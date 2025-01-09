@@ -1,4 +1,5 @@
-FROM node:18-slim as builder
+# ==== ビルドステージ ====
+FROM node:18-slim AS builder
 
 WORKDIR /app
 
@@ -12,7 +13,7 @@ RUN apt-get update -y && \
 COPY package*.json ./
 RUN npm install
 
-# Prisma関連のファイルをコピーして生成
+# Prisma Schemaをコピーして生成
 COPY prisma ./prisma/
 RUN npx prisma generate
 
@@ -20,19 +21,10 @@ RUN npx prisma generate
 COPY . .
 RUN npm run build
 
-# 実行用の軽量イメージ
+# ==== 実行ステージ ====
 FROM node:18-slim
 
 WORKDIR /app
-
-# Cloud SQL Auth Proxyのインストール
-RUN apt-get update -y && \
-    apt-get install -y ca-certificates wget && \
-    wget https://dl.google.com/cloudsql/cloud-sql-proxy.linux.amd64 -O /usr/local/bin/cloud-sql-proxy && \
-    chmod +x /usr/local/bin/cloud-sql-proxy && \
-    apt-get remove -y wget && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # 本番環境の依存関係のみをインストール
 COPY package*.json ./
@@ -42,16 +34,10 @@ RUN npm install --production
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/prisma ./prisma
 
-# 起動スクリプトをコピー
-COPY start.sh ./
-RUN chmod +x start.sh
+# ポート公開（Cloud Runでは8080がデフォルト）
+EXPOSE 8080
 
-EXPOSE 3000
-
-# ヘルスチェックの設定
-HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:3000/api/v1/health || exit 1
-
-# アプリケーション起動
-CMD ["./start.sh"]
+# アプリケーションを起動
+CMD ["node", "dist/app.js"]
