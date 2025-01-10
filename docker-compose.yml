@@ -6,19 +6,21 @@ services:
     container_name: cloudsql-proxy
     volumes:
       - ./credentials.json:/config
+      - ./cloudsql:/cloudsql
     command:
       - "--credentials-file=/config"
-      - "--port=5432"
+      - "--unix-socket=/cloudsql"
       - "saleperson-app:asia-northeast1:saleperson-app-db"
-    ports:
-      - "5432:5432"
+    networks:
+      - app-network
     restart: unless-stopped
 
   app:
     build: .
     container_name: app
     environment:
-      DATABASE_URL: "postgresql://postgres:Heisei50721@127.0.0.1:5432/saleperson-app-db"
+      # host=/cloudsql/<CONNECTION_NAME> の形式を必ず指定する
+      DATABASE_URL: "postgresql://postgres:Heisei50721@/saleperson-app-db?host=/cloudsql/saleperson-app:asia-northeast1:saleperson-app-db"
       PORT: 8080
       NODE_ENV: development
       PROJECT_ID: saleperson-app
@@ -26,10 +28,14 @@ services:
       DB_USER: postgres
       DB_PASSWORD: Heisei50721
       CLOUD_SQL_CONNECTION_NAME: saleperson-app:asia-northeast1:saleperson-app-db
+    volumes:
+      - ./cloudsql:/cloudsql
     ports:
       - "3000:8080"
     depends_on:
       - cloudsql-proxy
+    networks:
+      - app-network
     restart: unless-stopped
 
 networks:

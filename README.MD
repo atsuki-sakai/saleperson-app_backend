@@ -1,6 +1,6 @@
-# Salesperson Backend
+# Saleperson Backend
 
-バックエンドAPIサーバー for Salesperson Application
+バックエンドAPIサーバー for Saleperson Application
 
 ##開発中はCloud SQL Proxyでトンネルを立ち上げてからコンテナ起動
 
