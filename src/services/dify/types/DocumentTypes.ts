@@ -1,4 +1,3 @@
-
 import { IProcessRule } from './SegmentTypes';
 
 export interface ICreateDocumentByTextRequest {
@@ -40,7 +39,26 @@ export interface ICreateDocumentByTextResponse {
   batch: string;
 }
 
-// ... create-by-file, update-by-text なども同様に定義 ...
+export interface ICreateDocumentByFileResponse {
+  document: IDocumentInfo;
+  batch: string;
+}
+
+export interface IUpdateDocumentByTextRequest {
+  name?: string;
+  text: string;
+  process_rule?: IProcessRule;
+}
+
+export interface IUpdateDocumentByTextResponse {
+  document: IDocumentInfo;
+  batch: string;
+}
+
+export interface IUpdateDocumentByFileResponse {
+  document: IDocumentInfo;
+  batch: string;
+}
 
 export interface IGetDocumentsResponse {
   data: IDocumentInfo[];
@@ -48,4 +66,16 @@ export interface IGetDocumentsResponse {
   limit: number;
   total: number;
   page: number;
+}
+
+export interface IDeleteDocumentResponse {
+  result: 'success';
+}
+
+export interface IGetIndexingStatusResponse {
+  status: string;
+  total_count: number;
+  completed_count: number;
+  failed_count: number;
+  error_message?: string;
 }

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { StoreService } from '../services';
 import { logger } from '../utils/logger';
 
@@ -9,23 +9,18 @@ export class StoreController {
     this.storeService = new StoreService();
   }
 
-  async createStore(req: Request, res: Response) {
+  public createStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const store = await this.storeService.createStore(req.body);
       logger.info(`Store created with ID: ${store.id}`);
       res.status(201).json(store);
     } catch (error) {
       logger.error('Error creating store:', error);
-      console.log("Error creating store:", error);
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: 'Failed to create store' });
-      }
+      next(error);
     }
-  }
+  };
 
-  async getStore(req: Request, res: Response) {
+  public getStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const store = await this.storeService.getStore(req.params.storeId);
       if (!store) {
@@ -34,15 +29,11 @@ export class StoreController {
       res.json(store);
     } catch (error) {
       logger.error('Error getting store:', error);
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: 'Failed to get store' });
-      }
+      next(error);
     }
-  }
+  };
 
-  async getStores(req: Request, res: Response) {
+  public getStores = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const skip = parseInt(req.query.skip as string) || 0;
       const limit = parseInt(req.query.limit as string) || 100;
@@ -50,46 +41,33 @@ export class StoreController {
       res.json(stores);
     } catch (error) {
       logger.error('Error getting stores:', error);
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: 'Failed to get stores' });
-      }
+      next(error);
     }
-  }
+  };
 
-  async updateStore(req: Request, res: Response) {
+  public updateStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const store = await this.storeService.updateStore(req.params.storeId, req.body);
       res.json(store);
     } catch (error) {
       logger.error('Error updating store:', error);
-      if (error instanceof Error) {
-        if (error.message === 'Store not found') {
-          return res.status(404).json({ error: error.message });
-        }
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: 'Failed to update store' });
+      if (error instanceof Error && error.message === 'Store not found') {
+        return res.status(404).json({ error: error.message });
       }
+      next(error);
     }
-  }
+  };
 
-  async deleteStore(req: Request, res: Response) {
+  public deleteStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log("deleteStore", req.params.storeId);
       await this.storeService.deleteStore(req.params.storeId);
       res.status(204).send();
     } catch (error) {
       logger.error('Error deleting store:', error);
-      if (error instanceof Error) {
-        if (error.message === 'Store not found') {
-          return res.status(404).json({ error: error.message });
-        }
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: 'Failed to delete store' });
+      if (error instanceof Error && error.message === 'Store not found') {
+        return res.status(404).json({ error: error.message });
       }
+      next(error);
     }
-  }
+  };
 } 

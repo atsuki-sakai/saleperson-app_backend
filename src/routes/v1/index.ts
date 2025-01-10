@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { healthRouter } from './health';
 import { storeRouter } from './store.routes';
+import { difyRouter } from './dify.routes';
 
-export const v1Router = Router();
+export const router = Router();
 
-v1Router.use('/health', healthRouter);
-v1Router.use('/stores', storeRouter); 
+router.use('/health', healthRouter);
+router.use('/stores', storeRouter);
+router.use('/dify', difyRouter); 

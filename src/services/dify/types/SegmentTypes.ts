@@ -1,5 +1,3 @@
-
-
 export interface IPreProcessingRule {
     id: 'remove_extra_spaces' | 'remove_urls_emails' | string;
     enabled: boolean;
@@ -77,3 +75,21 @@ export interface IPreProcessingRule {
     doc_form: string;
   }
   
+
+  export interface IDeleteSegmentResponse {
+    data: ISegment;
+  }
+  
+  export interface IUpdateSegmentRequest {
+    segment: {
+      content: string;
+      answer: string;
+      keywords: string[];
+      enabled: boolean;
+    };
+  }
+  
+  export interface IUpdateSegmentResponse {
+    data: ISegment[];
+    doc_form: string;
+  }

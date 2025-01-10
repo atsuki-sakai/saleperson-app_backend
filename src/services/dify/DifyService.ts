@@ -1,16 +1,13 @@
-// src/services/dify/DifyService.ts
 
 import axios, { AxiosInstance } from 'axios';
 import { DatasetRepository } from './repositories/DatasetRepository';
 import { DocumentRepository } from './repositories/DocumentRepository';
 // import { SegmentRepository } from './repositories/SegmentRepository';
-// import { RetrievalRepository } from './repositories/RetrievalRepository';
 
 export class DifyService {
   public dataset: DatasetRepository;
   public document: DocumentRepository;
   // public segment: SegmentRepository;
-  // public retrieval: RetrievalRepository;
 
   private apiClient: AxiosInstance;
 
@@ -31,6 +28,5 @@ export class DifyService {
     this.dataset = new DatasetRepository(this.apiClient);
     this.document = new DocumentRepository(this.apiClient);
     // this.segment = new SegmentRepository(this.apiClient);
-    // this.retrieval = new RetrievalRepository(this.apiClient);
   }
 }
