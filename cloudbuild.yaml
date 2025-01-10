@@ -38,7 +38,7 @@ steps:
       - 'salesperson-backend-sa@saleperson-app.iam.gserviceaccount.com'
       # Secret Managerからの環境変数設定
       - '--set-secrets'
-      - 'DB_PASSWORD=db-password:latest,DB_USER=db-user:latest,NODE_ENV=node-env:latest,CLOUD_SQL_CONNECTION_NAME=cloud-sql-connection-name:latest,DB_NAME=db-name:latest,DATABASE_URL=database_url:latest,PROJECT_ID=project-id:latest,CLOUD_SQL_CONNECTION_NAME=cloud-sql-connection-name:latest'
+      - 'DB_PASSWORD=db-password:latest,DB_USER=db-user:latest,NODE_ENV=node-env:latest,CLOUD_SQL_CONNECTION_NAME=cloud-sql-connection-name:latest,DB_NAME=db-name:latest,DATABASE_URL=database_url:latest,PROJECT_ID=project-id:latest'
     id: 'deploy'
     waitFor: ['push-image']
 
