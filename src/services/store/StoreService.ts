@@ -1,6 +1,6 @@
-import { prisma } from '../config/database';
+import { prisma } from '../../lib/prisma';
 import { Store, Document, Prisma } from '@prisma/client';
-import { logger } from '../utils/logger';
+import { logger } from '../../utils/logger';
 
 export class StoreService {
   async getStore(storeId: string): Promise<Store | null> {
