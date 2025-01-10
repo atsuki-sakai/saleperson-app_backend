@@ -76,6 +76,7 @@ export class StoreController {
 
   async deleteStore(req: Request, res: Response) {
     try {
+        console.log("deleteStore", req.params.storeId);
       await this.storeService.deleteStore(req.params.storeId);
       res.status(204).send();
     } catch (error) {
