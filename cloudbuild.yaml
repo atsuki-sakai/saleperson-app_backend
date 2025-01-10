@@ -36,6 +36,8 @@ steps:
       - 'saleperson-app:asia-northeast1:saleperson-app-db'
       - '--service-account'
       - 'salesperson-backend-sa@saleperson-app.iam.gserviceaccount.com'
+      - '--port'
+      - '8080'
       # Secret Managerからの環境変数設定
       - '--set-secrets'
       - 'DB_PASSWORD=db-password:latest,DB_USER=db-user:latest,NODE_ENV=node-env:latest,CLOUD_SQL_CONNECTION_NAME=cloud-sql-connection-name:latest,DB_NAME=db-name:latest,DATABASE_URL=database-url:latest,PROJECT_ID=project-id:latest'

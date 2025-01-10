@@ -1,37 +1,40 @@
 version: '3.8'
 
 services:
+  cloudsql-proxy:
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1
+    container_name: cloudsql-proxy
+    volumes:
+      - ./credentials.json:/config
+    command:
+      - "--credentials-file=/config"
+      - "--port=5432"
+      - "saleperson-app:asia-northeast1:saleperson-app-db"
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
   app:
     build: .
-    ports:
-      - "3000:8080"  # ローカルの3000番ポートをコンテナの8080番ポートにマッピング
+    container_name: app
     environment:
-      # Cloud SQL Proxy経由でのデータベース接続
-      - DATABASE_URL=postgresql://postgres:Heisei50721@cloudsql:5433/saleperson-app-db
-      - NODE_ENV=development
-      - PORT=8080
-      - PROJECT_ID=saleperson-app
-      - DB_NAME=saleperson-app-db
-      - CLOUD_SQL_CONNECTION_NAME=saleperson-app:asia-northeast1:saleperson-app-db
-    networks:
-      - app-network
-    depends_on:
-      - cloudsql
-
-  cloudsql:
-    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1
-    command:
-      - "--address=0.0.0.0"
-      - "--port=5433"
-      - "--credentials-file=/credentials.json"
-      - "${CLOUD_SQL_CONNECTION_NAME}"
-    volumes:
-      - ./credentials.json:/credentials.json
+      DATABASE_URL: "postgresql://postgres:Heisei50721@127.0.0.1:5432/saleperson-app-db"
+      PORT: 8080
+      NODE_ENV: development
+      PROJECT_ID: saleperson-app
+      DB_NAME: saleperson-app-db
+      DB_USER: postgres
+      DB_PASSWORD: Heisei50721
+      CLOUD_SQL_CONNECTION_NAME: saleperson-app:asia-northeast1:saleperson-app-db
     ports:
-      - "5433:5433"
-    networks:
-      - app-network
+      - "3000:8080"
+    depends_on:
+      - cloudsql-proxy
+    restart: unless-stopped
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  cloudsql:
