@@ -23,6 +23,7 @@ export class StoreService {
         orderBy: { createdAt: 'desc' }
       });
     } catch (error) {
+      console.log("Error fetching stores:", error);
       logger.error('Database error in getStores:', error);
       throw new Error('Failed to fetch stores');
     }

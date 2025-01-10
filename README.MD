@@ -2,7 +2,13 @@
 
 バックエンドAPIサーバー for Salesperson Application
 
+##開発中はCloud SQL Proxyでトンネルを立ち上げてからコンテナ起動
+
+```bash
 ./cloud-sql-proxy --port 5432 saleperson-app:asia-northeast1:saleperson-app-db
+
+docker compose up
+```
 
 ## 技術スタック
 

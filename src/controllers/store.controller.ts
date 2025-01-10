@@ -16,6 +16,7 @@ export class StoreController {
       res.status(201).json(store);
     } catch (error) {
       logger.error('Error creating store:', error);
+      console.log("Error creating store:", error);
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
       } else {
