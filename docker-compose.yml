@@ -10,6 +10,9 @@ services:
       - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@cloudsql:5432/saleperson-app-db
       - NODE_ENV=development
       - PORT=8080
+      - PROJECT_ID=saleperson-app
+      - DB_NAME=saleperson-app-db
+      - CLOUD_SQL_CONNECTION_NAME=saleperson-app:asia-northeast1:saleperson-app-db
     networks:
       - app-network
     depends_on:

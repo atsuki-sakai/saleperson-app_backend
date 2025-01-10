@@ -1,40 +1,27 @@
 import { PrismaClient } from '@prisma/client';
 
 // データベース接続設定
-const DB_USER = process.env.DB_USER || 'postgres';
 const DB_PASSWORD = process.env.DB_PASSWORD;
+const PROJECT_ID = process.env.PROJECT_ID;
 const DB_NAME = process.env.DB_NAME || 'saleperson-app-db';
-const CLOUD_SQL_CONNECTION_NAME = process.env.CLOUD_SQL_CONNECTION_NAME;
+const CLOUD_SQL_CONNECTION_NAME = `${PROJECT_ID}:asia-northeast1:saleperson-app-db`;
 
-// 環境に応じた接続文字列を生成
-const getDatabaseUrl = () => {
-  // 環境変数のログ出力（デバッグ用）
-  console.log('Environment variables:', {
-    NODE_ENV: process.env.NODE_ENV,
-    DB_USER,
+// Cloud Run環境でのUnixソケット接続文字列
+export const DATABASE_URL = `postgresql://postgres:${DB_PASSWORD}@/${DB_NAME}?host=/cloudsql/${CLOUD_SQL_CONNECTION_NAME}`;
+
+console.log("Effective DATABASE_URL:", DATABASE_URL);
+// 設定のエクスポート
+export const dbConfig = {
+    DATABASE_URL,
     DB_NAME,
+    PROJECT_ID,
     CLOUD_SQL_CONNECTION_NAME,
-  });
-
-  if (process.env.NODE_ENV === 'production' && CLOUD_SQL_CONNECTION_NAME) {
-    // Cloud Run環境での接続文字列（Unix socket）
-    const url = `postgresql://${DB_USER}:${DB_PASSWORD}@/${DB_NAME}?host=/cloudsql/${CLOUD_SQL_CONNECTION_NAME}`;
-    console.log('Production DATABASE_URL:', url);
-    return url;
-  } else {
-    // ローカル開発環境での接続文字列
-    const url = `postgresql://${DB_USER}:${DB_PASSWORD}@localhost:5432/${DB_NAME}`;
-    console.log('Development DATABASE_URL:', url);
-    return url;
-  }
 };
 
-// Prismaクライアントの設定
 export const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: getDatabaseUrl()
+      url: process.env.DATABASE_URL
     }
-  },
-  log: ['query', 'info', 'warn', 'error'],
+  }
 });
