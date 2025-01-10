@@ -5,10 +5,10 @@ services:
     image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1
     container_name: cloudsql-proxy
     volumes:
-      - ./credentials.json:/config
+      - ./credentials.json:/config/credentials.json
       - ./cloudsql:/cloudsql
     command:
-      - "--credentials-file=/config"
+      - "--credentials-file=/config/credentials.json"
       - "--unix-socket=/cloudsql"
       - "saleperson-app:asia-northeast1:saleperson-app-db"
     networks:
@@ -20,7 +20,7 @@ services:
     container_name: app
     environment:
       # host=/cloudsql/<CONNECTION_NAME> の形式を必ず指定する
-      DATABASE_URL: "postgresql://postgres:Heisei50721@/saleperson-app-db?host=/cloudsql/saleperson-app:asia-northeast1:saleperson-app-db"
+      DATABASE_URL: "postgresql://postgres:Heisei50721@localhost/saleperson-app-db?host=/cloudsql/saleperson-app:asia-northeast1:saleperson-app-db"
       PORT: 8080
       NODE_ENV: development
       PROJECT_ID: saleperson-app

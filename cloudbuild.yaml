@@ -32,7 +32,7 @@ steps:
     - '--add-cloudsql-instances'
     - 'saleperson-app:asia-northeast1:saleperson-app-db'
     - '--service-account'
-    - 'saleperson-backend-sa@salesperson-app.iam.gserviceaccount.com' ##　saleでなくでsalesperson-app.iam.gserviceaccount.comであっている
+    - 'saleperson-app-backend@saleperson-app.iam.gserviceaccount.com'
     - '--port'
     - '8080'
     - '--set-secrets'
