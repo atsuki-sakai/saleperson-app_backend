@@ -16,7 +16,7 @@ const getDatabaseUrl = () => {
     CLOUD_SQL_CONNECTION_NAME,
   });
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' && CLOUD_SQL_CONNECTION_NAME) {
     // Cloud Run環境での接続文字列（Unix socket）
     const url = `postgresql://${DB_USER}:${DB_PASSWORD}@/${DB_NAME}?host=/cloudsql/${CLOUD_SQL_CONNECTION_NAME}`;
     console.log('Production DATABASE_URL:', url);
