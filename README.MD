@@ -2,16 +2,7 @@
 
 バックエンドAPIサーバー for Saleperson Application
 
-##開発中はCloud SQL Proxyでトンネルを立ち上げてからコンテナ起動して下さい。
-
-```bash
-./cloud-sql-proxy --port 5432 saleperson-app:asia-northeast1:saleperson-app-db
-
- docker compose up
-```
-
-## 技術スタック
-
+## 1. 技術スタック
 - Node.js
 - TypeScript
 - Express
@@ -21,8 +12,7 @@
 - Cloud Run
 - Cloud SQL
 
-## プロジェクト構造
-
+## 2. プロジェクト構造
 ```
 src/
   ├─ services/
@@ -30,69 +20,98 @@ src/
   │   │   ├─ DifyService.ts          # Difyサービスのメインクラス
   │   │   ├─ errors/
   │   │   │   └─ DifyDrror.ts        # Dify専用のエラークラス
-  │   │   ├─ types/
-  │   │   │   ├─ index.ts            # 型定義のエクスポート
+  │   │   ├─ types/                  # 型定義ディレクトリ
+  │   │   │   ├─ index.ts
   │   │   │   ├─ DifyCommonTypes.ts  # 共通の型定義
-  │   │   │   ├─ DatasetTypes.ts     # データセット関連の型
-  │   │   │   ├─ DocumentTypes.ts    # ドキュメント関連の型
-  │   │   │   ├─ SegmentTypes.ts     # セグメント関連の型
-  │   │   │   └─ RetrievalTypes.ts   # 検索・取得関連の型
-  │   │   ├─ repositories/
-  │   │   │   ├─ DatasetRepository.ts    # データセットAPI
-  │   │   │   ├─ DocumentRepository.ts   # ドキュメントAPI
+  │   │   │   ├─ DatasetTypes.ts     # データセット関連
+  │   │   │   ├─ DocumentTypes.ts    # ドキュメント関連
+  │   │   │   ├─ SegmentTypes.ts     # セグメント関連
+  │   │   │   └─ RetrievalTypes.ts   # 検索・取得関連
+  │   │   ├─ repositories/           # API実装ディレクトリ
+  │   │   │   ├─ DatasetRepository.ts
+  │   │   │   ├─ DocumentRepository.ts
   │   │   │   └─ ...Repository.ts
-  │   │   └─ index.ts                # 公開用エントリーポイント
+  │   │   └─ index.ts
   │   └─ ... 他のService
-  └─ ...
 ```
 
-### サービス構造の説明
+## 3. 開発環境のセットアップ手順
 
-#### 1. 型定義 (`types/`)
-- `DifyCommonTypes.ts`: エラーなど共通の型定義
-- `DatasetTypes.ts`: データセット（ナレッジベース）のリクエスト/レスポンス型
-- `DocumentTypes.ts`: ドキュメント操作の型定義
-- `SegmentTypes.ts`: セグメント（チャンク）関連の型
-- `RetrievalTypes.ts`: 検索・取得機能の型定義
-
-#### 2. リポジトリ (`repositories/`)
-各APIエンドポイントごとに分割された実装:
-- `DatasetRepository.ts`: データセット操作
-- `DocumentRepository.ts`: ドキュメント操作
-- 他のリポジトリ
-
-#### 3. サービス層
-`DifyService.ts`: 各リポジトリを統合し、外部向けのインターフェースを提供
-
-## 開発環境のセットアップ
-
-1. 必要な依存関係をインストール:
+### Step 1: 依存関係のインストール
 ```bash
 npm install
 ```
 
-2. 環境変数の設定:
+### Step 2: 環境変数の設定
 ```bash
 cp .env.example .env
-# .envファイルを編集して必要な値を設定
+# .envファイルを編集
 ```
 
-3. データベースのマイグレーション:
+### Step 3: Cloud SQL Proxyの起動
+```bash
+./cloud-sql-proxy --port 5432 saleperson-app:asia-northeast1:saleperson-app-db
+```
+
+### Step 4: Dockerの起動
+```bash
+docker compose up
+```
+
+### Step 5: データベースマイグレーション
 ```bash
 npx prisma migrate dev
 ```
 
-## デプロイ
+## 4. データベース接続設定
 
-このアプリケーションはCloud RunとCloud SQLを使用してデプロイされます。
+### 開発環境
+```
+DATABASE_URL=postgresql://{DB_USER_NAME}:{DB_PASSWORD}@localhost:{DB_PORT}/${DB_NAME}
+```
 
-### 必要な準備
+### 本番環境
+```
+DATABASE_URL=postgresql://{DB_USER_NAME}:{DB_PASSWORD}@local/{DB_NAME}?host=/cloudsql/{DB_CONNECTION_NAME}
+```
 
-1. GCPプロジェクトの設定
-2. 必要なAPIの有効化:
+## 5. 本番環境の設定
+
+### Cloud Run環境変数
+| 変数名 | 値 |
+|--------|-----|
+| NODE_ENV | production |
+| DATABASE_URL | postgresql://postgres:xxxxx@local/saleperson-app-db?host=/cloudsql/saleperson-app:asia-northeast1:saleperson-app-db |
+| DB_USER | postgres |
+| DB_NAME | saleperson-app-db |
+| CLOUD_SQL_CONNECTION_NAME | saleperson-app:asia-northeast1:saleperson-app-db |
+| PROJECT_ID | saleperson-app |
+
+### Secret Manager設定
+以下の変数をSecret Managerで管理:
+- cloud-sql-connection-name
+- database-url
+- db-name
+- db-password
+- db-user
+- node-env
+- product-id
+
+## 6. デプロイ前の準備
+
+### GCPプロジェクトの設定
+1. 必要なAPIの有効化:
    - Cloud Run API
    - Cloud Build API
    - Container Registry API
    - Cloud SQL Admin API
-3. サービスアカウントの設定
-4. Cloud SQLインスタンスの作成
+2. サービスアカウントの設定
+3. Cloud SQLインスタンスの作成
+
+
+```bash
+./cloud-sql-proxy --port 5432 saleperson-app:asia-northeast1:saleperson-app-db
+
+ docker compose up
+```
+
