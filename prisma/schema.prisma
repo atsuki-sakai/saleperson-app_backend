@@ -25,7 +25,7 @@ model Store {
   updatedAt            DateTime   @updatedAt @map("updated_at")
   documents            Document[]
 
-  @@map("Store")
+  @@map("store")
 }
 
 model Document {
@@ -37,5 +37,5 @@ model Document {
   updatedAt DateTime @updatedAt @map("updated_at")
   store     Store    @relation(fields: [storeId], references: [id])
 
-  @@map("Document")
+  @@map("document")
 }
