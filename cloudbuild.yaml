@@ -36,14 +36,9 @@ steps:
       - 'saleperson-app:asia-northeast1:saleperson-app-db'
       - '--service-account'
       - 'salesperson-backend-sa@saleperson-app.iam.gserviceaccount.com'
-
-      # Secret Managerの `db-password` を環境変数 DB_PASSWORD に注入
+      # Secret Managerからの環境変数設定
       - '--set-secrets'
-      - 'DB_PASSWORD=db-password:latest'
-
-      # 他の環境変数 (プロジェクトID や DB名 など)
-      - '--set-env-vars'
-      - 'NODE_ENV=production,PROJECT_ID=saleperson-app,DB_NAME=saleperson-app-db'
+      - 'DB_PASSWORD=db-password:latest,DB_USER=db-user:latest,NODE_ENV=node-env:latest,CLOUD_SQL_CONNECTION_NAME=cloud-sql-connection-name:latest,DB_NAME=db-name:latest'
     id: 'deploy'
     waitFor: ['push-image']
 
