@@ -28,6 +28,7 @@ const PORT = parseInt(process.env.PORT || '8080', 10);
 
 // 例: app.ts など
 console.log("Effective DATABASE_URL:", process.env.DATABASE_URL);
+console.log("Effective JSON_DATABASE_URL:", JSON.stringify(process.env.DATABASE_URL));
 console.log("Effective PORT:", process.env.PORT);
 console.log("Effective NODE_ENV:", process.env.NODE_ENV);
 console.log("Effective PROJECT_ID:", process.env.PROJECT_ID);
