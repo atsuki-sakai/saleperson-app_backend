@@ -7,7 +7,7 @@ services:
       - "3000:8080"  # ローカルの3000番ポートをコンテナの8080番ポートにマッピング
     environment:
       # Cloud SQL Proxy経由でのデータベース接続
-      - DATABASE_URL=postgresql://postgres:Heisei50721@cloudsql:5432/saleperson-app-db
+      - DATABASE_URL=postgresql://postgres:Heisei50721@cloudsql:5433/saleperson-app-db
       - NODE_ENV=development
       - PORT=8080
       - PROJECT_ID=saleperson-app
@@ -22,13 +22,13 @@ services:
     image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1
     command:
       - "--address=0.0.0.0"
-      - "--port=5432"
+      - "--port=5433"
       - "--credentials-file=/credentials.json"
       - "${CLOUD_SQL_CONNECTION_NAME}"
     volumes:
       - ./credentials.json:/credentials.json
     ports:
-      - "5432:5432"
+      - "5433:5433"
     networks:
       - app-network
 

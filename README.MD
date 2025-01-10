@@ -7,6 +7,12 @@
 ```bash
 ./cloud-sql-proxy --port 5432 saleperson-app:asia-northeast1:saleperson-app-db
 
+./cloud-sql-proxy \
+  --address 0.0.0.0 \
+  --port 5432 \
+  --credentials-file=credentials.json \
+  saleperson-app:asia-northeast1:saleperson-app-db
+
  docker compose up
 ```
 

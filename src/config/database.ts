@@ -7,9 +7,9 @@ const DB_NAME = process.env.DB_NAME || 'saleperson-app-db';
 const CLOUD_SQL_CONNECTION_NAME = `${PROJECT_ID}:asia-northeast1:saleperson-app-db`;
 
 // Cloud Run環境でのUnixソケット接続文字列
-export const DATABASE_URL = `postgresql://postgres:${DB_PASSWORD}@/${DB_NAME}?host=/cloudsql/${CLOUD_SQL_CONNECTION_NAME}`;
+// export const DATABASE_URL = `postgresql://postgres:${DB_PASSWORD}@/${DB_NAME}?host=/cloudsql/${CLOUD_SQL_CONNECTION_NAME}`;
+export const DATABASE_URL = `postgresql://postgres:${DB_PASSWORD}@localhost:5432/${DB_NAME}`;
 
-console.log("Effective DATABASE_URL:", DATABASE_URL);
 // 設定のエクスポート
 export const dbConfig = {
     DATABASE_URL,
@@ -21,7 +21,7 @@ export const dbConfig = {
 export const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: process.env.DATABASE_URL
+      url: DATABASE_URL
     }
   }
 });
