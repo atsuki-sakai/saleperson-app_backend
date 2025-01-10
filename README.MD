@@ -7,8 +7,9 @@
 ```bash
 ./cloud-sql-proxy --port 5432 saleperson-app:asia-northeast1:saleperson-app-db
 
-docker compose up
+ docker compose up
 ```
+
 
 ## 技術スタック
 
