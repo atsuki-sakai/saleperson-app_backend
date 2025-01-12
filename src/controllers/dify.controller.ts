@@ -104,8 +104,8 @@ export class DifyController {
 
   public createDataset = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log("createDataset", req.body);
       const result = await this.difyService.dataset.createDataset(req.body);
+      console.log("result", result);
       res.status(201).json(result);
     } catch (error) {
       next(error);

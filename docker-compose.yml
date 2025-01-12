@@ -26,7 +26,8 @@ services:
       PROJECT_ID: saleperson-app
       DB_NAME: saleperson-app-db
       DIFY_API_KEY: dataset-aXiUWNohg3IWpU9Oq9i7ALyd
-      DIFY_BASE_URL: http://localhost/v1
+      ## ホストマシンでDifyを実行している場合は、http://localhost/v1 => host.docker.internal/v1
+      DIFY_BASE_URL: http://host.docker.internal/v1
       DB_USER: postgres
       DB_PASSWORD: Heisei50721
       CLOUD_SQL_CONNECTION_NAME: saleperson-app:asia-northeast1:saleperson-app-db
