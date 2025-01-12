@@ -6,7 +6,7 @@ export interface ICreateDocumentByTextRequest {
   indexing_technique: 'high_quality' | 'economy';
   doc_form?: 'text_model' | 'hierarchical_model' | 'qa_model';
   doc_language?: string;
-  process_rule?: IProcessRule;
+  process_rule: IProcessRule;
 }
 
 export interface IDocumentInfo {

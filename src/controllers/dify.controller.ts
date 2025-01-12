@@ -15,11 +15,14 @@ export class DifyController {
   public createDocumentByText = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { datasetId } = req.params;
+      if (!datasetId) {
+        return res.status(400).json({ error: 'datasetId is required' });
+      }
       const result = await this.difyService.document.createDocumentByText(datasetId, req.body);
       res.status(201).json(result);
     } catch (error) {
       logger.error('Error creating document:', error);
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -30,7 +33,7 @@ export class DifyController {
       const result = await this.difyService.document.createDocumentByFile(datasetId, filePath, data);
       res.json(result);
     } catch (error) {
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -40,7 +43,7 @@ export class DifyController {
       const result = await this.difyService.document.updateDocumentByText(datasetId, documentId, req.body);
       res.json(result);
     } catch (error) {
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -56,7 +59,7 @@ export class DifyController {
       );
       res.json(result);
     } catch (error) {
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -67,7 +70,7 @@ export class DifyController {
       res.status(204).send();
     } catch (error) {
       logger.error('Error deleting document:', error);
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -83,7 +86,8 @@ export class DifyController {
       );
       res.json(result);
     } catch (error) {
-      next(error);
+      console.log("error", error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -98,17 +102,28 @@ export class DifyController {
       );
       res.json(result);
     } catch (error) {
-      next(error);
+      console.log("error", error);
+      res.status(500).json({ error: error });
+    }
+  };
+
+  public addDocumentSegments = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { datasetId, documentId } = req.params;
+      const result = await this.difyService.document.addDocumentSegments(datasetId, documentId, req.body);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: error });
     }
   };
 
   public createDataset = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this.difyService.dataset.createDataset(req.body);
-      console.log("result", result);
       res.status(201).json(result);
     } catch (error) {
-      next(error);
+      console.log("error", error);
+      res.status(500).json({ error: error });
     }
   };
 }

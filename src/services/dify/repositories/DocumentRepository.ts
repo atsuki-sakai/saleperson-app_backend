@@ -40,6 +40,7 @@ export class DocumentRepository {
   ): Promise<ICreateDocumentByTextResponse> {
     try {
       const endpoint = `/datasets/${datasetId}/document/create-by-text`;
+      console.log("data", data);
       const response = await this.apiClient.post<ICreateDocumentByTextResponse>(endpoint, data);
       return response.data;
     } catch (err) {

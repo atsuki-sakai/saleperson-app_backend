@@ -23,7 +23,7 @@ export class StoreController {
       if (error instanceof Error && error.message.includes('required')) {
         return res.status(400).json({ error: error.message });
       }
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -36,7 +36,7 @@ export class StoreController {
       res.json(store);
     } catch (error) {
       logger.error('Error getting store:', error);
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -48,7 +48,7 @@ export class StoreController {
       res.json(stores);
     } catch (error) {
       logger.error('Error getting stores:', error);
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -61,7 +61,7 @@ export class StoreController {
       if (error instanceof Error && error.message === 'Store not found') {
         return res.status(404).json({ error: error.message });
       }
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 
@@ -74,7 +74,7 @@ export class StoreController {
       if (error instanceof Error && error.message === 'Store not found') {
         return res.status(404).json({ error: error.message });
       }
-      next(error);
+      res.status(500).json({ error: error });
     }
   };
 } 
