@@ -35,6 +35,8 @@ console.log("Effective DB_NAME:", process.env.DB_NAME);
 console.log("Connection Name:", process.env.CLOUD_SQL_CONNECTION_NAME);
 console.log("Effective DB_USER:", process.env.DB_USER);
 console.log("Effective DB_PASSWORD:", process.env.DB_PASSWORD);
+console.log("Effective DIFY_API_KEY:", process.env.DIFY_API_KEY);
+console.log("Effective DIFY_BASE_URL:", process.env.DIFY_BASE_URL);
 
 // サーバー起動時のエラーハンドリングを追加
 const server = app.listen(PORT, '0.0.0.0', () => {

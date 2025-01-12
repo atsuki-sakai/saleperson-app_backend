@@ -5,6 +5,7 @@ export const difyRouter = Router();
 const difyController = new DifyController();
 
 // Document routes
+difyRouter.post('/datasets', difyController.createDataset);
 difyRouter.post('/datasets/:datasetId/document/create-by-text', difyController.createDocumentByText);
 difyRouter.post('/datasets/:datasetId/document/create-by-file', difyController.createDocumentByFile);
 difyRouter.post('/datasets/:datasetId/documents/:documentId/update-by-text', difyController.updateDocumentByText);

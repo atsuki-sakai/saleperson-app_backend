@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { DifyService } from '../services/dify/DifyService';
+import { logger } from '../utils/logger';
 
 export class DifyController {
   private difyService: DifyService;
@@ -15,8 +16,9 @@ export class DifyController {
     try {
       const { datasetId } = req.params;
       const result = await this.difyService.document.createDocumentByText(datasetId, req.body);
-      res.json(result);
+      res.status(201).json(result);
     } catch (error) {
+      logger.error('Error creating document:', error);
       next(error);
     }
   };
@@ -61,9 +63,10 @@ export class DifyController {
   public deleteDocument = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { datasetId, documentId } = req.params;
-      const result = await this.difyService.document.deleteDocument(datasetId, documentId); 
-      res.json(result);
+      await this.difyService.document.deleteDocument(datasetId, documentId); 
+      res.status(204).send();
     } catch (error) {
+      logger.error('Error deleting document:', error);
       next(error);
     }
   };
@@ -94,6 +97,15 @@ export class DifyController {
         req.body
       );
       res.json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public createDataset = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await this.difyService.dataset.createDataset(req.body);
+      res.status(201).json(result);
     } catch (error) {
       next(error);
     }

@@ -11,11 +11,18 @@ export class StoreController {
 
   public createStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      if (!req.body.storeId) {
+        return res.status(400).json({ error: 'storeId is required' });
+      }
+
       const store = await this.storeService.createStore(req.body);
       logger.info(`Store created with ID: ${store.id}`);
       res.status(201).json(store);
     } catch (error) {
       logger.error('Error creating store:', error);
+      if (error instanceof Error && error.message.includes('required')) {
+        return res.status(400).json({ error: error.message });
+      }
       next(error);
     }
   };
