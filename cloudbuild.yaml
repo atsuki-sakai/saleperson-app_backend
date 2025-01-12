@@ -36,7 +36,7 @@ steps:
     - '--port'
     - '8080'
     - '--set-secrets'
-    - 'DB_PASSWORD=db-password:latest,DB_USER=db-user:latest,NODE_ENV=node-env:latest,CLOUD_SQL_CONNECTION_NAME=cloud-sql-connection-name:latest,DB_NAME=db-name:latest,DATABASE_URL=database-url:latest,PROJECT_ID=project-id:latest'
+    - 'DB_PASSWORD=db-password:latest,DB_USER=db-user:latest,NODE_ENV=node-env:latest,CLOUD_SQL_CONNECTION_NAME=cloud-sql-connection-name:latest,DB_NAME=db-name:latest,DATABASE_URL=database-url:latest,PROJECT_ID=project-id:latest, DIFY_API_KEY=dify-api-key:latest, DIFY_BASE_URL=dify-base-url:latest'
   id: 'deploy'
   waitFor: ['push-image']
 

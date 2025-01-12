@@ -32,30 +32,12 @@ export class StoreService {
   async createStore(data: Prisma.StoreCreateInput): Promise<Store> {
     try {
       const store = await prisma.store.create({
-        data: {
-          storeId: data.storeId,
-          chatApiKey: data.chatApiKey,
-          workflowApiKey: data.workflowApiKey,
-          systemPrompt: data.systemPrompt,
-          storePrompt: data.storePrompt,
-          iconUrl: data.iconUrl,
-          tone: data.tone,
-          blockingKeywords: data.blockingKeywords,
-          datasetId: data.datasetId,
-          chatColor: data.chatColor,
-          faqContent: data.faqContent,
-          metaFieldDescription: data.metaFieldDescription
-        },
+        data,
         include: { documents: true }
       });
       return store;
     } catch (error) {
       logger.error('Database error in createStore:', error);
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        if (error.code === 'P2002') {
-          throw new Error('Store with this ID already exists');
-        }
-      }
       throw new Error('Failed to create store in database');
     }
   }

@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import FormData from 'form-data';
 import { createReadStream } from 'fs';
-import { DifyDrror } from '../types/DifyDrror';
+import { DifyError } from '../types/DifyError';
 
 import {
   ICreateDocumentByTextRequest,
@@ -279,13 +279,13 @@ export class DocumentRepository {
       const data = axiosError.response?.data as { code?: string; message?: string };
 
       const errorMsg = data?.message || 'Document APIで不明なエラーが発生しました。';
-      throw new DifyDrror(
+      throw new DifyError(
         `[DocumentRepository] ${errorMsg} (status: ${statusCode} ${statusText ?? ''})`,
         data?.code,
         statusCode
       );
     } else {
-      throw new DifyDrror('[DocumentRepository] 不明なエラーが発生しました。');
+      throw new DifyError('[DocumentRepository] 不明なエラーが発生しました。');
     }
   }
 }

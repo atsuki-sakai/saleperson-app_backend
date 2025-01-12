@@ -19,7 +19,7 @@ src/
   │   ├─ dify/
   │   │   ├─ DifyService.ts          # Difyサービスのメインクラス
   │   │   ├─ errors/
-  │   │   │   └─ DifyDrror.ts        # Dify専用のエラークラス
+  │   │   │   └─ DifyError.ts        # Dify専用のエラークラス
   │   │   ├─ types/                  # 型定義ディレクトリ
   │   │   │   ├─ index.ts
   │   │   │   ├─ DifyCommonTypes.ts  # 共通の型定義

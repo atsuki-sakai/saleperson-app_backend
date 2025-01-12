@@ -1,6 +1,6 @@
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { DifyDrror } from '../types/DifyDrror';
+import { DifyError } from '../types/DifyError';
 
 import {
   ICreateDatasetRequest,
@@ -52,13 +52,13 @@ export class DatasetRepository {
       const data = axiosError.response?.data as { code?: string; message?: string };
 
       const errorMsg = data?.message || 'Dataset APIで不明なエラーが発生しました。';
-      throw new DifyDrror(
+      throw new DifyError(
         `[DatasetRepository] ${errorMsg} (status: ${statusCode} ${statusText ?? ''})`,
         data?.code,
         statusCode
       );
     } else {
-      throw new DifyDrror('[DatasetRepository] 不明なエラーが発生しました。');
+      throw new DifyError('[DatasetRepository] 不明なエラーが発生しました。');
     }
   }
 }
