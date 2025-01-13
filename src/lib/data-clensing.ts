@@ -2345,7 +2345,7 @@ export const productSampleData = JSON.stringify({
               "id": "gid://shopify/Product/7291303002303",
               "title": "DEEP HYDRATING CREAM \"ONE\" 50g x 3SETS",
               "handle": "deep-hydrating-cream-one-50g-x-3sets",
-              "description": "Enjoy 4 functions in One product. Taking into consideration of local factors that affects the skin such as weather and cuisine, teinei DEEP HYDRATING CREAM \"ONE\" is specially curated for Malaysians. What is All-in-one? A skincare product that includes Toner, Serum, Emulsion, Moisturizer so that you can complete your skincare routine in just ONE STEP after cleansing. Say goodbye to fumbling through your array of skincare products! Perfect for people on-the-go and those who want a simple yet effective product! Radiant & glowy skin in One step. Gently formulated for people with sensitive skin. Rest assured as teinei DEEP HYDRATING CREAM \"ONE\" is equipped to support all skin types through restoring your skin barrier function. Achieve a radiant and healthy complexion through our product! Japanese derived natural ingredients. Carefully selected ingredients from the nature of Japan; Sakura, Yuzu, Sage and Rice Lees Extract, to gently support your skin function. teinei DEEP HYDRATING CREAM \"ONE\" will keep your skin moisturized even in the hot climate of Malaysia. Diverse voices that said “Hydrated skin with One” Launched in Malaysia since October 2021, love and satisfied voices are spreading through the community from people of all ages and diverse backgrounds. High Quality & Safety from Japan. Why is our product curated for Malaysians even though it was Made-In-Japan? Through many research and finding the right manufacturer to provide you the best benefits of Japanese skincare, your safety is our concern. Your safety is our priority. Here at teinei, we strive for inclusivity when it comes to skincare. Harmful ingredients and harsh chemicals are removed, as well as pig and cow-derived ingredients for your peace of mind. Ingredients water, glycerin, butylene glycol, pentylene glycol, jojoba oil/macadamia seed oil esters, sodium aspartate, sodium acetylated hyaluronate, alanine, allantoin, arginine, isobutyl isostearate, isoleucine, disodium inosinate, ellagic acid, olea europaea (olive) fruit oil, carbomer, disodium guanylate, glycosyl trehalose, glycine, glyceryl glucoside, dipotassium glycyrrhizate, glutamic acid, cocoyl adipic acid / trimethylolpropane copolymer, simmondsia chinensis (jojoba) seed oil, phytosteryl macadamiate, oenothera biennis (evening primrose) seed extract, citrus junos fruit extract, lysine hcl, leucine, hydrolyzed collagen, hydrolyzed hyaluronic acid, hydrolyzed royal jelly extract, hydrogenated starch hydrolysate, oryza sativa (rice) lees extract, hydrogenated lecithin",
+              "description": "Enjoy 4 functions in One product. Taking into consideration of local factors that affects the skin such as weather and cuisine, teinei DEEP HYDRATING CREAM \"ONE\" is specially curated for Malaysians. What is All-in-one? A skincare product that includes Toner, Serum, Emulsion, Moisturizer so that you can complete your skincare routine in just ONE STEP after cleansing. Say goodbye to fumbling through your array of skincare products! Perfect for people on-the-go and those who want a simple yet effective product! Radiant & glowy skin in One step. Gently formulated for people with sensitive skin. Rest assured as teinei DEEP HYDRATING CREAM \"ONE\" is equipped to support all skin types through restoring your skin barrier function. Achieve a radiant and healthy complexion through our product! Japanese derived natural ingredients. Carefully selected ingredients from the nature of Japan; Sakura, Yuzu, Sage and Rice Lees Extract, to gently support your skin function. teinei DEEP HYDRATING CREAM \"ONE\" will keep your skin moisturized even in the hot climate of Malaysia. Diverse voices that said Hydrated skin with One Launched in Malaysia since October 2021, love and satisfied voices are spreading through the community from people of all ages and diverse backgrounds. High Quality & Safety from Japan. Why is our product curated for Malaysians even though it was Made-In-Japan? Through many research and finding the right manufacturer to provide you the best benefits of Japanese skincare, your safety is our concern. Your safety is our priority. Here at teinei, we strive for inclusivity when it comes to skincare. Harmful ingredients and harsh chemicals are removed, as well as pig and cow-derived ingredients for your peace of mind. Ingredients water, glycerin, butylene glycol, pentylene glycol, jojoba oil/macadamia seed oil esters, sodium aspartate, sodium acetylated hyaluronate, alanine, allantoin, arginine, isobutyl isostearate, isoleucine, disodium inosinate, ellagic acid, olea europaea (olive) fruit oil, carbomer, disodium guanylate, glycosyl trehalose, glycine, glyceryl glucoside, dipotassium glycyrrhizate, glutamic acid, cocoyl adipic acid / trimethylolpropane copolymer, simmondsia chinensis (jojoba) seed oil, phytosteryl macadamiate, oenothera biennis (evening primrose) seed extract, citrus junos fruit extract, lysine hcl, leucine, hydrolyzed collagen, hydrolyzed hyaluronic acid, hydrolyzed royal jelly extract, hydrogenated starch hydrolysate, oryza sativa (rice) lees extract, hydrogenated lecithin",
               "productType": "化粧水・乳液",
               "vendor": "teinei-Japan",
               "status": "DRAFT",
@@ -2414,7 +2414,7 @@ export const productSampleData = JSON.stringify({
               "id": "gid://shopify/Product/7291325153471",
               "title": "teinei RENEW VITAMIN CREAM “ONE” (50g)",
               "handle": "teinei-renew-vitamin-cream-one-50g",
-              "description": "Are you concerned about pimples or breakouts? Introducing the newest addition to teinei's comprehensive skincare line “ONE”, teinei RENEW VITAMIN CREAM \"ONE\", a 4-IN-ONE product that combines toner, serum, and emulsion into one. Now with an added new function that provides intensive care for pimples with the power of vitamins. Supporting round-the-clock treatment for clear, renewed skin. Formulated with triple action vitamin B,C and E, its smooth texture blends into a watery-like consistency for a quick absorption that penetrates well into the skin. ・Promotes intensive care to achieve glowy, youthful skin in ONE step.・For those who may have pimples scars and rough skin concerns.・Prevents age spots, freckles and wrinkles. ・Provides UV protection and conditions rough skin from the inside by activating skin turnover.・Carefully selected natural active ingredients such as glasswort (moisturizing) and lemongrass (anti-inflammatory, antibacterial and antioxidant).・Contains 3% Niacinamide to prevent aging and revitalize the skin. Triple care in ONE 1. Inflammation →Soothing care2. Blemishes → Clear care 3. Enlarged pores → Moisturizing care ★FREE FROM HARSH CHEMICALSFree of Paraben, Ethanol, Talc, UV absorber, Mineral Oil, Sulfate, Pig-derived ingredients, Cow-derived ingredients, Synthetic dye, Synthetic perfume, and Silicone that can cause irritation and breakouts. Making it safe for people with sensitive skin too. ★HOW TO USE: After washing your face, take a suitable amount (about 1cm diameter). Scoop the product with the attached spatula in your hand, and blend into the skin by gently patting. Apply an extra layer to dry areas if required. ★INGREDIENTSWATER, GLYCERIN, BUTYLENE GLYCOL, NIACINAMIDE, PENTYLENE GLYCOL, CETYL ETHYLHEXANOATE, BETAINE, 3-O-ETHYL ASCORBIC ACID, ASCORBYL GLUCOSIDE, BIS-GLYCERYL ASCORBATE, TOCOPHEROL, TOCOPHERYL ACETATE, DIPOTASSIUM GLYCYRRHIZATE, SALICORNIA HERBACEA EXTRACT, POLYGONUM CUSPIDATUM ROOT EXTRACT, SCUTELLARIA BAICALENSIS ROOT EXTRACT, GLYCYRRHIZA GLABRA (LICORICE) ROOT EXTRACT, CHAMOMILLA RECUTITA (MATRICARIA) FLOWER EXTRACT, CAMELLIA SINENSIS LEAF EXTRACT, CENTELLA ASIATICA EXTRACT, CYMBOPOGON SCHOENANTHUS LEAF/STEM EXTRACT, ROSMARINUS OFFICINALIS (ROSEMARY) LEAF EXTRACT, SODIUM HYALURONATE, HYDROLYZED HYALURONIC ACID, GLYCOSYL TREHALOSE, GLYCERYL GLUCOSIDE, TURPENTINE, TREHALOSE, CITRUS AURANTIUM BERGAMIA (BERGAMOT) FRUIT OIL, ORIGANUM MAJORANA LEAF OIL, EUCALYPTUS GLOBULUS LEAF OIL, LAVANDULA ANGUSTIFOLIA (LAVENDER) OIL, ROSMARINUS OFFICINALIS (ROSEMARY) LEAF OIL, PHENOXYETHANOL, POLYSORBATE 60, HYDROGENATED STARCH HYDROLYSATE, TRISODIUM HEDTA, CARBOMER, XANTHAN GUM, POTASSIUM HYDROXIDE",
+              "description": "Are you concerned about pimples or breakouts? Introducing the newest addition to teinei's comprehensive skincare line ONE, teinei RENEW VITAMIN CREAM \"ONE\", a 4-IN-ONE product that combines toner, serum, and emulsion into one. Now with an added new function that provides intensive care for pimples with the power of vitamins. Supporting round-the-clock treatment for clear, renewed skin. Formulated with triple action vitamin B,C and E, its smooth texture blends into a watery-like consistency for a quick absorption that penetrates well into the skin. ・Promotes intensive care to achieve glowy, youthful skin in ONE step.・For those who may have pimples scars and rough skin concerns.・Prevents age spots, freckles and wrinkles. ・Provides UV protection and conditions rough skin from the inside by activating skin turnover.・Carefully selected natural active ingredients such as glasswort (moisturizing) and lemongrass (anti-inflammatory, antibacterial and antioxidant).・Contains 3% Niacinamide to prevent aging and revitalize the skin. Triple care in ONE 1. Inflammation →Soothing care2. Blemishes → Clear care 3. Enlarged pores → Moisturizing care ★FREE FROM HARSH CHEMICALSFree of Paraben, Ethanol, Talc, UV absorber, Mineral Oil, Sulfate, Pig-derived ingredients, Cow-derived ingredients, Synthetic dye, Synthetic perfume, and Silicone that can cause irritation and breakouts. Making it safe for people with sensitive skin too. ★HOW TO USE: After washing your face, take a suitable amount (about 1cm diameter). Scoop the product with the attached spatula in your hand, and blend into the skin by gently patting. Apply an extra layer to dry areas if required. ★INGREDIENTSWATER, GLYCERIN, BUTYLENE GLYCOL, NIACINAMIDE, PENTYLENE GLYCOL, CETYL ETHYLHEXANOATE, BETAINE, 3-O-ETHYL ASCORBIC ACID, ASCORBYL GLUCOSIDE, BIS-GLYCERYL ASCORBATE, TOCOPHEROL, TOCOPHERYL ACETATE, DIPOTASSIUM GLYCYRRHIZATE, SALICORNIA HERBACEA EXTRACT, POLYGONUM CUSPIDATUM ROOT EXTRACT, SCUTELLARIA BAICALENSIS ROOT EXTRACT, GLYCYRRHIZA GLABRA (LICORICE) ROOT EXTRACT, CHAMOMILLA RECUTITA (MATRICARIA) FLOWER EXTRACT, CAMELLIA SINENSIS LEAF EXTRACT, CENTELLA ASIATICA EXTRACT, CYMBOPOGON SCHOENANTHUS LEAF/STEM EXTRACT, ROSMARINUS OFFICINALIS (ROSEMARY) LEAF EXTRACT, SODIUM HYALURONATE, HYDROLYZED HYALURONIC ACID, GLYCOSYL TREHALOSE, GLYCERYL GLUCOSIDE, TURPENTINE, TREHALOSE, CITRUS AURANTIUM BERGAMIA (BERGAMOT) FRUIT OIL, ORIGANUM MAJORANA LEAF OIL, EUCALYPTUS GLOBULUS LEAF OIL, LAVANDULA ANGUSTIFOLIA (LAVENDER) OIL, ROSMARINUS OFFICINALIS (ROSEMARY) LEAF OIL, PHENOXYETHANOL, POLYSORBATE 60, HYDROGENATED STARCH HYDROLYSATE, TRISODIUM HEDTA, CARBOMER, XANTHAN GUM, POTASSIUM HYDROXIDE",
               "productType": "美容・健康",
               "vendor": "teinei-Japan",
               "status": "ACTIVE",
@@ -2513,9 +2513,9 @@ export const productSampleData = JSON.stringify({
           {
             "node": {
               "id": "gid://shopify/Product/7336075428031",
-              "title": "teinei 2-in-1 HYDRATING DUAL CLEANSING “ONE” (120g)",
+              "title": "teinei 2-in-1 HYDRATING DUAL CLEANSING ONE (120g)",
               "handle": "hydrating-dual-cleansing-one",
-              "description": "teinei Hydrating Dual Cleansing “ONE” is a hybrid makeup remover and cleanser featuring a skin-refreshing Yuzu Extract that clears away makeup, excess sebum and impurities without drying out the skin. Starting out as a firm yet soft gel out of the tube, the cleanser evolves into a smooth oil when applied to allow dirt and makeup to slide off the skin easily without stripping moisture away to reveal a refreshed glowy complexion. Key benefits: Unique oil-in-gel formula that transforms from a gel to silky consistency. Effectively melts away makeup, removes residual dirt and oil, cleanses away impurities. Leaves skin residue free without feeling tight and dry. Say goodbye to double cleansing! One wash for squeaky clean skin! Key Ingredients: Yuzu Extract enhances the skin barrier function, retains moisture and improves wrinkles and fine lines. Ultra hydrating Natto Gum, made from fermented soybeans, prolongs and improves key hyaluronic acid functions. Okinawa Mozuku Extract calms skin inflammation. Rice bran oil, brightens the complexion, encourages moisture retention, and soothes irritation. ★FREE FROM HARSH CHEMICALS Free of Paraben, Ethanol, Talc, UV absorber, Mineral Oil, Sulfate, Pig-derived ingredients, Cow-derived ingredients, Synthetic dye, Synthetic perfume, and Silicone that can cause irritation and breakouts. Making it safe for people with sensitive skin too. ★HOW TO USE: Squeeze a suitable amount (about 1cm diameter) and rub the product in between dry hands. Massage over dry skin, concentrating on areas where makeup is applied. Be gentle around the eyes and lip area. Rinse off once done and gently pat dry with a towel.",
+              "description": "teinei Hydrating Dual Cleansing ONE is a hybrid makeup remover and cleanser featuring a skin-refreshing Yuzu Extract that clears away makeup, excess sebum and impurities without drying out the skin. Starting out as a firm yet soft gel out of the tube, the cleanser evolves into a smooth oil when applied to allow dirt and makeup to slide off the skin easily without stripping moisture away to reveal a refreshed glowy complexion. Key benefits: Unique oil-in-gel formula that transforms from a gel to silky consistency. Effectively melts away makeup, removes residual dirt and oil, cleanses away impurities. Leaves skin residue free without feeling tight and dry. Say goodbye to double cleansing! One wash for squeaky clean skin! Key Ingredients: Yuzu Extract enhances the skin barrier function, retains moisture and improves wrinkles and fine lines. Ultra hydrating Natto Gum, made from fermented soybeans, prolongs and improves key hyaluronic acid functions. Okinawa Mozuku Extract calms skin inflammation. Rice bran oil, brightens the complexion, encourages moisture retention, and soothes irritation. ★FREE FROM HARSH CHEMICALS Free of Paraben, Ethanol, Talc, UV absorber, Mineral Oil, Sulfate, Pig-derived ingredients, Cow-derived ingredients, Synthetic dye, Synthetic perfume, and Silicone that can cause irritation and breakouts. Making it safe for people with sensitive skin too. ★HOW TO USE: Squeeze a suitable amount (about 1cm diameter) and rub the product in between dry hands. Massage over dry skin, concentrating on areas where makeup is applied. Be gentle around the eyes and lip area. Rinse off once done and gently pat dry with a towel.",
               "productType": "Cleansing",
               "vendor": "teinei-Japan",
               "status": "ACTIVE",
@@ -2789,23 +2789,18 @@ export function convertProductsToText(products: Product[], shop: string) {
   }
   
 
-export const orderToSegments = (text: string) => {
+export const orderToSegments = (text: string): { id: number; text: string; keywords: string[] }[] => {
+    const orderContents = text.split(CHUNK_SEPARATOR_SYMBOL);
 
-    // FIXME: テストデータ
-    const orderDataObject = JSON.parse(orderSampleData);
-    const orderData = orderDataObject.data.orders.edges.map((edge: any) => edge.node) as Order[];
-    const orderText = convertOrdersToText(orderData);
- 
-    console.log("orderText", orderText);
-    const orderContents = orderText.split(CHUNK_SEPARATOR_SYMBOL);
-
-    console.log("orderContents", orderContents);
     return orderContents.map((orderContent, index) => {
-        const content = orderContent.split('注文データ')[1].split(`\n`);
-        console.log("content", content);
-        const allKeywords = content.map((keyword: string) => keyword && keyword.trim());
-        console.log("allKeywords", allKeywords);
-        
+        const content = orderContent.split('注文データ')[1];
+        if (!content) {
+            return null;
+        }
+
+        const texts = content.split(`\n`).filter(Boolean);
+        const allKeywords = texts.map((keyword: string) => keyword && keyword.trim());
+            
         const availableKeywords = [
             "注文日",
             "注文番号",
@@ -2814,18 +2809,22 @@ export const orderToSegments = (text: string) => {
             "注文者メールアドレス",
             "注文タグ",
         ];
+
         const filteredKeywords = allKeywords.filter((keyword: string) =>
-            availableKeywords.includes(keyword.split(`:`)[0]),
+            availableKeywords.includes(keyword.split(`:`)[0].trim()),
         );
 
-        const productKeywords = orderContent.split("商品: ")[1].split(`,`).map((keyword: string) => keyword && keyword.split(`x`)[0].trim());
+        const productPart = content.split("商品: ")[1];
+        const productKeywords = productPart 
+            ? productPart.split(`,`).map((keyword: string) => keyword && keyword.split(`x`)[0].trim())
+            : [];
 
         const keywords = productKeywords.concat(filteredKeywords);
 
         return {
             id: index,
             text: content,
-            keywords: keywords,
+            keywords: keywords.filter(Boolean),
         };
-    });
+    }).filter(Boolean) as { id: number; text: string; keywords: string[] }[]; // Type assertion to fix the error
 };

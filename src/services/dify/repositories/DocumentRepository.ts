@@ -277,16 +277,32 @@ export class DocumentRepository {
       const axiosError = err as AxiosError;
       const statusCode = axiosError.response?.status;
       const statusText = axiosError.response?.statusText;
-      const data = axiosError.response?.data as { code?: string; message?: string };
+      const data = axiosError.response?.data as { code?: string; message?: string; error?: any };
 
-      const errorMsg = data?.message || 'Document APIで不明なエラーが発生しました。';
+      console.error('[DocumentRepository] Error details:', {
+        status: statusCode,
+        statusText,
+        data: axiosError.response?.data,
+        config: {
+          url: axiosError.config?.url,
+          method: axiosError.config?.method,
+          headers: axiosError.config?.headers,
+          data: axiosError.config?.data
+        }
+      });
+
+      const errorMsg = data?.message || data?.error?.message || 'Document APIで不明なエラーが発生しました。';
       throw new DifyError(
         `[DocumentRepository] ${errorMsg} (status: ${statusCode} ${statusText ?? ''})`,
-        data?.code,
+        data?.code || data?.error?.code || 'unknown',
         statusCode
       );
+    } else if (err instanceof Error) {
+      console.error('[DocumentRepository] Non-Axios error:', err);
+      throw new DifyError(`[DocumentRepository] ${err.message}`, 'unknown');
     } else {
-      throw new DifyError('[DocumentRepository] 不明なエラーが発生しました。');
+      console.error('[DocumentRepository] Unknown error:', err);
+      throw new DifyError('[DocumentRepository] 不明なエラーが発生しました。', 'unknown');
     }
   }
 }
