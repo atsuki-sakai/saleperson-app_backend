@@ -31,17 +31,6 @@ export class DifyController {
     }
   };
 
-  public createDocumentByFile = async (req: Request, res: Response) => {
-    try {
-      const { datasetId } = req.params;
-      const { filePath, ...data } = req.body;
-      const result = await this.difyService.document.createDocumentByFile(datasetId, filePath, data);
-      res.json(result);
-    } catch (error) {
-      res.status(500).json({ error: error });
-    }
-  };
-
   public updateDocumentByText = async (req: Request, res: Response) => {
     try {
       const { datasetId, documentId } = req.params;
@@ -115,6 +104,27 @@ export class DifyController {
         req.body
       );
       res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  };
+
+  public addDocumentSegments = async (req: Request, res: Response) => {
+    try {
+      const { datasetId, documentId } = req.params;
+
+
+      const orderDataObject = JSON.parse(orderSampleData);
+      const orderData = orderDataObject.data.orders.edges.map((edge: any) => edge.node) as Order[];
+      const orderText = convertOrdersToText(orderData);
+      const segments = orderToSegments(orderText);
+      console.log("segments", segments[0]);
+
+      const results = await Promise.all(segments.map(async (segment) => {
+        const result = await this.difyService.document.addDocumentSegments(datasetId, documentId, { segments: [{ content: segment.text, keywords: segment.keywords }] });
+        console.log("result", result);
+      }));
+      res.json(results);
     } catch (error) {
       res.status(500).json({ error: error });
     }

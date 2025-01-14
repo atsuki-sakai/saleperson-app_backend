@@ -1,15 +1,11 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import FormData from 'form-data';
-import { createReadStream } from 'fs';
 import { DifyError } from '../types/DifyError';
 
 import {
   ICreateDocumentByTextRequest,
   ICreateDocumentByTextResponse,
-  ICreateDocumentByFileResponse,
   IUpdateDocumentByTextRequest,
   IUpdateDocumentByTextResponse,
-  IUpdateDocumentByFileResponse,
   IGetDocumentsResponse,
   IDeleteDocumentResponse,
   IGetIndexingStatusResponse,
@@ -31,7 +27,7 @@ export class DocumentRepository {
   }
 
   /**
-   * ========== 1) Create Document by Text ==========
+   * ========== Create Document by Text ==========
    * POST /datasets/{dataset_id}/document/create-by-text
    */
   public async createDocumentByText(
@@ -48,32 +44,7 @@ export class DocumentRepository {
   }
 
   /**
-   * ========== 2) Create Document by File ==========
-   * POST /datasets/{dataset_id}/document/create-by-file
-   * multipart/form-data でファイルを送信します。
-   */
-  public async createDocumentByFile(
-    datasetId: string,
-    filePath: string,
-    dataPayload: Record<string, any>
-  ): Promise<ICreateDocumentByFileResponse> {
-    try {
-      const endpoint = `/datasets/${datasetId}/document/create-by-file`;
-      const form = new FormData();
-      form.append('data', JSON.stringify(dataPayload));
-      form.append('file', createReadStream(filePath));
-
-      const response = await this.apiClient.post<ICreateDocumentByFileResponse>(endpoint, form, {
-        headers: form.getHeaders(),
-      });
-      return response.data;
-    } catch (err) {
-      this.handleError(err);
-    }
-  }
-
-  /**
-   * ========== 3) Update Document by Text ==========
+   * ========== Update Document by Text ==========
    * POST /datasets/{dataset_id}/documents/{document_id}/update-by-text
    */
   public async updateDocumentByText(
@@ -91,33 +62,7 @@ export class DocumentRepository {
   }
 
   /**
-   * ========== 4) Update Document by File ==========
-   * POST /datasets/{dataset_id}/documents/{document_id}/update-by-file
-   */
-  public async updateDocumentByFile(
-    datasetId: string,
-    documentId: string,
-    filePath: string,
-    dataPayload: Record<string, any>
-  ): Promise<IUpdateDocumentByFileResponse> {
-    try {
-      const endpoint = `/datasets/${datasetId}/documents/${documentId}/update-by-file`;
-
-      const form = new FormData();
-      form.append('data', JSON.stringify(dataPayload), { contentType: 'text/plain' });
-      form.append('file', filePath); // 実ファイルなら fs.createReadStream など
-
-      const response = await this.apiClient.post<IUpdateDocumentByFileResponse>(endpoint, form, {
-        headers: form.getHeaders(),
-      });
-      return response.data;
-    } catch (err) {
-      this.handleError(err);
-    }
-  }
-
-  /**
-   * ========== 5) Get Document List ==========
+   * ========== Get Document List ==========
    * GET /datasets/{dataset_id}/documents
    */
   public async getDocuments(
@@ -140,7 +85,7 @@ export class DocumentRepository {
   }
 
   /**
-   * ========== 6) Delete a Document ==========
+   * ========== Delete a Document ==========
    * DELETE /datasets/{dataset_id}/documents/{document_id}
    */
   public async deleteDocument(
@@ -157,7 +102,7 @@ export class DocumentRepository {
   }
 
   /**
-   * ========== 7) Get Document Embedding Status ==========
+   * ========== Get Document Embedding Status ==========
    * GET /datasets/{dataset_id}/documents/{batch}/indexing-status
    */
   public async getIndexingStatus(
@@ -174,7 +119,7 @@ export class DocumentRepository {
   }
 
   /**
-   * ========== 8) Add Chunks to a Document (Segments) ==========
+   * ========== Add Chunks to a Document (Segments) ==========
    * POST /datasets/{dataset_id}/documents/{document_id}/segments
    */
   public async addDocumentSegments(
@@ -192,7 +137,7 @@ export class DocumentRepository {
   }
 
   /**
-   * ========== 9) Get Chunks from a Document (Segments) ==========
+   * ========== Get Chunks from a Document (Segments) ==========
    * GET /datasets/{dataset_id}/documents/{document_id}/segments
    */
   public async getDocumentSegments(

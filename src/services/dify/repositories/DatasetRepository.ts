@@ -15,6 +15,11 @@ export class DatasetRepository {
     this.apiClient = apiClient;
   }
 
+
+  /**
+   * ========== Create Empty Dataset ==========
+   * POST /datasets
+   */
   public async createDataset(data: ICreateDatasetRequest): Promise<ICreateDatasetResponse> {
     try {
       const response = await this.apiClient.post<ICreateDatasetResponse>('/datasets', data);
@@ -24,6 +29,11 @@ export class DatasetRepository {
     }
   }
 
+
+  /**
+   * ========== Get Datasets ==========
+   * GET /datasets
+   */
   public async getDatasets(page = 1, limit = 20): Promise<IGetDatasetsResponse> {
     try {
       const response = await this.apiClient.get<IGetDatasetsResponse>('/datasets', {
@@ -35,6 +45,11 @@ export class DatasetRepository {
     }
   }
 
+
+  /**
+   * ========== Delete Dataset ==========
+   * DELETE /datasets/{dataset_id}
+   */
   public async deleteDataset(datasetId: string): Promise<void> {
     try {
       await this.apiClient.delete(`/datasets/${datasetId}`);
@@ -43,6 +58,11 @@ export class DatasetRepository {
     }
   }
 
+
+
+  /**
+   * ========== 共通エラーハンドリング ==========
+   */
   private handleError(err: unknown): never {
     if (axios.isAxiosError(err)) {
       const axiosError = err as AxiosError;

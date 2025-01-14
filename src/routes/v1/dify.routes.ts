@@ -8,7 +8,6 @@ const difyController = new DifyController();
 difyRouter.post('/datasets', difyController.createDataset);
 difyRouter.post('/datasets/create-dataset-and-document', difyController.createDatasetAndDocument);
 difyRouter.post('/datasets/:datasetId/document/create-by-text', difyController.createDocumentByText);
-difyRouter.post('/datasets/:datasetId/document/create-by-file', difyController.createDocumentByFile);
 difyRouter.post('/datasets/:datasetId/documents/:documentId/update-by-text', difyController.updateDocumentByText);
 difyRouter.get('/datasets/:datasetId/documents', difyController.getDocuments);
 difyRouter.get('/datasets', difyController.getDatasets);
