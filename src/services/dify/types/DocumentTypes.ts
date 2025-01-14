@@ -39,10 +39,6 @@ export interface ICreateDocumentByTextResponse {
   batch: string;
 }
 
-export interface ICreateDocumentByFileResponse {
-  document: IDocumentInfo;
-  batch: string;
-}
 
 export interface IUpdateDocumentByTextRequest {
   name?: string;
@@ -55,10 +51,6 @@ export interface IUpdateDocumentByTextResponse {
   batch: string;
 }
 
-export interface IUpdateDocumentByFileResponse {
-  document: IDocumentInfo;
-  batch: string;
-}
 
 export interface IGetDocumentsResponse {
   data: IDocumentInfo[];
