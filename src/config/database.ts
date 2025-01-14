@@ -6,9 +6,6 @@ const CLOUD_SQL_CONNECTION_NAME = `${PROJECT_ID}:asia-northeast1:saleperson-app-
 
 const DATABASE_URL = process.env.DATABASE_URL || "";
 
-console.log("Effective DATABASE_URL:", DATABASE_URL);
-console.log("Environment:", process.env.NODE_ENV);
-
 // データベース設定のエクスポート
 export const dbConfig = {
     DATABASE_URL,

@@ -6,7 +6,6 @@ import {
   ICreateDatasetRequest,
   ICreateDatasetResponse,
   IGetDatasetsResponse,
-  // ...
 } from '../types';
 
 export class DatasetRepository {
@@ -52,7 +51,6 @@ export class DatasetRepository {
       const data = axiosError.response?.data as { code?: string; message?: string };
 
       const errorMsg = data?.message || 'Dataset APIで不明なエラーが発生しました。';
-      console.log("errorMsg", errorMsg);
       throw new DifyError(
         `[DatasetRepository] ${errorMsg} (status: ${statusCode} ${statusText ?? ''})`,
         data?.code,

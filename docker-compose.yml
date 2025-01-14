@@ -6,11 +6,13 @@ services:
     container_name: cloudsql-proxy
     volumes:
       - ./credentials.json:/config/credentials.json
-      - ./cloudsql:/cloudsql
     command:
       - "--credentials-file=/config/credentials.json"
-      - "--unix-socket=/cloudsql"
-      - "saleperson-app:asia-northeast1:saleperson-app-db"
+      - "--address=0.0.0.0"
+      - "--port=5432"
+      - "${CLOUD_SQL_CONNECTION_NAME}"
+    ports:
+      - "5432:5432"
     networks:
       - app-network
     restart: unless-stopped
@@ -19,20 +21,16 @@ services:
     build: .
     container_name: app
     environment:
-      # host=/cloudsql/<CONNECTION_NAME> の形式を必ず指定する
-      DATABASE_URL: "postgresql://postgres:Heisei50721@localhost/saleperson-app-db?host=/cloudsql/saleperson-app:asia-northeast1:saleperson-app-db"
+      DATABASE_URL: "postgresql://${DB_USER}:${DB_PASSWORD}@cloudsql-proxy:5432/${DB_NAME}"
       PORT: 8080
-      NODE_ENV: development
-      PROJECT_ID: saleperson-app
-      DB_NAME: saleperson-app-db
-      DIFY_API_KEY: dataset-aXiUWNohg3IWpU9Oq9i7ALyd
-      ## ホストマシンでDifyを実行している場合は、http://localhost/v1 => host.docker.internal/v1
-      DIFY_BASE_URL: http://host.docker.internal/v1
-      DB_USER: postgres
-      DB_PASSWORD: Heisei50721
-      CLOUD_SQL_CONNECTION_NAME: saleperson-app:asia-northeast1:saleperson-app-db
-    volumes:
-      - ./cloudsql:/cloudsql
+      NODE_ENV: ${NODE_ENV}
+      PROJECT_ID: ${PROJECT_ID}
+      DB_NAME: ${DB_NAME}
+      DIFY_API_KEY: ${DIFY_API_KEY}
+      DIFY_BASE_URL: ${DIFY_BASE_URL}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      CLOUD_SQL_CONNECTION_NAME: ${CLOUD_SQL_CONNECTION_NAME}
     ports:
       - "3000:8080"
     depends_on:
@@ -47,3 +45,4 @@ networks:
 
 volumes:
   cloudsql:
+

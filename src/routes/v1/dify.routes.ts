@@ -6,11 +6,12 @@ const difyController = new DifyController();
 
 // Document routes
 difyRouter.post('/datasets', difyController.createDataset);
-difyRouter.post('/datasets/:datasetId/documents/:documentId/segments', difyController.addDocumentSegments);
+difyRouter.post('/datasets/create-dataset-and-document', difyController.createDatasetAndDocument);
 difyRouter.post('/datasets/:datasetId/document/create-by-text', difyController.createDocumentByText);
 difyRouter.post('/datasets/:datasetId/document/create-by-file', difyController.createDocumentByFile);
 difyRouter.post('/datasets/:datasetId/documents/:documentId/update-by-text', difyController.updateDocumentByText);
 difyRouter.get('/datasets/:datasetId/documents', difyController.getDocuments);
+difyRouter.get('/datasets', difyController.getDatasets);
 difyRouter.delete('/datasets/:datasetId/documents/:documentId', difyController.deleteDocument);
 
 // Segment routes

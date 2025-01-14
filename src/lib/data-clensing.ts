@@ -2686,8 +2686,7 @@ export const productSampleData = JSON.stringify({
 export function convertOrdersToText(orders: Order[]): string {
     return orders
       .map((order: Order) => {
-        return `注文データ
-        注文日: ${order.createdAt.toLocaleString()}
+        return `注文日:${order.createdAt.toLocaleString()}
         注文番号: ${order.name || "不明"}
         注文ID: ${order.id.replace("gid://shopify/Order/", "")}
         注文金額: ${order.currentTotalPriceSet?.presentmentMoney.amount || "不明"} ${order.currentTotalPriceSet.presentmentMoney.currencyCode}
@@ -2703,13 +2702,10 @@ export function convertOrdersToText(orders: Order[]): string {
           .map(
             (item: any) =>
               `${item.title} x ${item.quantity}点 (${item.originalTotalSet?.presentmentMoney.amount}円)`,
-          )
-  
-          .join(", ")}
-          ${CHUNK_SEPARATOR_SYMBOL}`;
+          ).join(", ")}`;
       })
       .filter(Boolean) // 空の文字列を除去
-      .join("\n");
+      .join(CHUNK_SEPARATOR_SYMBOL);
 }
 
 export function convertProductsToText(products: Product[], shop: string) {
@@ -2723,7 +2719,7 @@ export function convertProductsToText(products: Product[], shop: string) {
       const options = product.options
         .map((option: any) => `${option.name}: ${option.values.join(", ")}`)
         .filter(Boolean)
-        .join("\n");
+        .join(",");
   
       // 価格範囲
       const priceRange = `${product.priceRangeV2.minVariantPrice.amount} ${product.priceRangeV2.minVariantPrice.currencyCode} ～ ${product.priceRangeV2.maxVariantPrice.amount} ${product.priceRangeV2.maxVariantPrice.currencyCode}`;
@@ -2755,7 +2751,7 @@ export function convertProductsToText(products: Product[], shop: string) {
         const selectedOptions = variantNode.selectedOptions
           .map((o: any) => `${o.name}: ${o.value}`)
           .join("\n");
-        const sku = variantNode.sku?.replaceAll("-", "") || "なし";
+        const sku = variantNode.sku?.replaceAll("-", "") || null;
   
         return `商品名: ${variantNode.title}
         オプション: ${selectedOptions}
@@ -2764,29 +2760,26 @@ export function convertProductsToText(products: Product[], shop: string) {
         在庫数: ${variantNode.inventoryQuantity || 0}`;
       });
   
-      return `\n## 商品情報
+      return `商品情報
       ${product.title == "Default Title" ? null : `商品名: ${product.title}`}
       商品ID: ${product.id.replace("gid://shopify/Product/", "")}
       商品URL: https://${shop}/products/${product.handle}
-      商品タイプ: ${product.productType || "なし"}
-      販売元: ${product.vendor || "なし"}
+      商品タイプ: ${product.productType || ""}
+      販売元: ${product.vendor || ""}
       公開ステータス: ${product.status}
       総在庫数: ${product.totalInventory || 0}
       最終更新日時: ${product.updatedAt}
       商品説明: ${
-        product.description?.replace(/<[^>]*>/g, "").replace(/\n/g, " ") || "なし"
+        product.description?.replace(/<[^>]*>/g, "").replace(/\n/g, " ") || ""
       }
-      オプション:
-      ${options || "なし"}
+      オプション:${options || ""}
       価格情報: ${priceRange}
-      バリエーション:
-      ${variants}
-      ## メタフィールド
-      ${metafields || "なし"}`;
+      バリエーション:${variants}
+      ${metafields || ""}`;
     });
   
     return productTexts.join(CHUNK_SEPARATOR_SYMBOL);
-  }
+}
   
 
 export const orderToSegments = (text: string): { id: number; text: string; keywords: string[] }[] => {
