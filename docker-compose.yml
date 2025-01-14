@@ -16,7 +16,6 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-
   app:
     build: .
     container_name: app
