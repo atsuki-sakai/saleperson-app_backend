@@ -7,35 +7,85 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime? @db.Timestamp(6)
+  accessToken   String
+  userId        BigInt?
+  accountOwner  Boolean   @default(false)
+  collaborator  Boolean?  @default(false)
+  email         String?
+  emailVerified Boolean?  @default(false)
+  firstName     String?
+  lastName      String?
+  locale        String?
+
+  @@index([shop])
+  @@map("session")
+}
+
+/// Shopifyストアの設定とメタデータを管理するモデル
+/// ストア固有の設定やLLM関連の設定を保存
 model Store {
-  id                   String     @id @default(uuid())
-  storeId              String     @unique @map("store_id")
-  chatApiKey           String?    @map("chat_api_key")
-  workflowApiKey       String?    @map("workflow_api_key")
-  systemPrompt         String?    @map("system_prompt")
-  storePrompt          String?    @map("store_prompt")
-  iconUrl              String?    @map("icon_url")
+  /// ストアの一意識別子（UUID）
+  id                   String      @id @default(uuid())
+  /// Shopifyストアの一意識別子（## ※session.shopを使用 ##）
+  storeId              String      @unique @map("storeId")
+  /// チャット機能用のAPIキー(ワークフローの構築後、手動で設定する必要があります)
+  chatApiKey           String?     
+  /// ワークフロー機能用のAPIキー(ワークフローの構築後、手動で設定する必要があります)※未実装
+  workflowApiKey       String?     
+  /// AIシステム共通のプロンプト設定
+  systemPrompt         String?     
+  /// ストア固有のAIプロンプト設定
+  storePrompt          String?     
+  /// チャットウィジェットのアイコンURL
+  iconUrl              String?     
+  /// AIの応答トーン設定（例: 丁寧、カジュアル）
   tone                 String?
-  blockingKeywords     String?    @map("blocking_keywords")
-  datasetId            String?    @map("dataset_id")
-  chatColor            String?    @map("chat_color")
-  faqContent           String?    @map("faq_content")
-  metaFieldDescription String?    @map("meta_field_description")
-  createdAt            DateTime   @default(now()) @map("created_at")
-  updatedAt            DateTime   @updatedAt @map("updated_at")
+  /// チャットでブロックするキーワード
+  blockingKeywords     String?    
+  /// ストアのデータセットID(１ストアに１つのデータセットID)
+  datasetId            String?     
+  /// チャットウィジェットの色設定
+  chatColor            String?     
+  /// レコードの作成日時
+  createdAt            DateTime    @default(now()) @map("createdAt")
+  /// レコードの最終更新日時
+  updatedAt            DateTime    @updatedAt @map("updatedAt")
+  /// ストアのよくある質問のテキスト
+  faqContent           String?     
+  /// 商品のメタフィールドの説明(メタフィールドがある場合のみ)
+  metaFieldDescription String?     
+  /// ストアに紐づくドキュメント一覧(よくある質問、商品データ、メタフィールドの説明など)
   documents            Document[]
 
+  @@index([storeId])
   @@map("store")
 }
 
+/// FAQやその他のナレッジベースとなるドキュメントを保存
 model Document {
-  id        String   @id @default(uuid())
-  name      String
-  text      String
-  storeId   String   @map("store_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  store     Store    @relation(fields: [storeId], references: [id])
+  /// ドキュメントの一意識別子（UUID）
+  id         String   @id @default(uuid())
+  /// ドキュメントのタイトル
+  name       String
+  /// ドキュメントのタイプ
+  type       String
+  /// 関連するストアのID（外部キー）
+  storeId    String  
+  datasetId  String?  
+  /// レコードの作成日時
+  createdAt  DateTime @default(now()) @map("createdAt")
+  /// レコードの最終更新日時
+  updatedAt  DateTime @updatedAt @map("updatedAt")
+  /// ストアとの関連付け
+  store      Store    @relation(fields: [storeId], references: [storeId])
 
+  @@index([storeId])
   @@map("document")
 }
