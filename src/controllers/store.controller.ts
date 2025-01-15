@@ -6,8 +6,17 @@ import { z } from 'zod';
 // Schema
 const createStoreSchema = z.object({
   storeId: z.string().min(1),
-  storeName: z.string().min(1),
-  storeUrl: z.string().min(1),
+  chatApiKey: z.string().optional(),
+  workflowApiKey: z.string().optional(),
+  systemPrompt: z.string().optional(),
+  storePrompt: z.string().optional(),
+  iconUrl: z.string().optional(),
+  tone: z.string().optional(),
+  blockingKeywords: z.string().optional(),
+  datasetId: z.string().optional(),
+  chatColor: z.string().optional(),
+  faqContent: z.string().optional(),
+  metaFieldDescription: z.string().optional(),
 });
 
 const getStoreSchema = z.object({
