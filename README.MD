@@ -115,3 +115,24 @@ DATABASE_URL=postgresql://{DB_USER_NAME}:{DB_PASSWORD}@local/{DB_NAME}?host=/clo
  docker compose up
 ```
 
+# ローカルDBの立ち上げ方
+
+## 1. ローカルDB開発環境
+```bash
+docker compose -f docker-compose.local.yml up
+```
+
+## 2. PostgreSQLコンテナを起動
+```bash
+docker compose -f docker-compose.local.yml up postgres -d
+```
+
+## 3. マイグレーション実行
+```bash
+DATABASE_URL=postgresql://postgres:{DB_PASSWORD}@localhost:5432/saleperson-app-db npx prisma migrate dev
+```
+
+## 4. アプリケーション起動
+```bash
+docker compose -f docker-compose.local.yml up
+```
