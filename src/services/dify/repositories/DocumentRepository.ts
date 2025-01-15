@@ -67,16 +67,12 @@ export class DocumentRepository {
    */
   public async getDocuments(
     datasetId: string,
-    keyword?: string,
     page = 1,
     limit = 20
   ): Promise<IGetDocumentsResponse> {
     try {
       const endpoint = `/datasets/${datasetId}/documents`;
       const params: Record<string, any> = { page, limit };
-      if (keyword) {
-        params.keyword = keyword;
-      }
       const response = await this.apiClient.get<IGetDocumentsResponse>(endpoint, { params });
       return response.data;
     } catch (err) {

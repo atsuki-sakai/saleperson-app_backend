@@ -1,7 +1,41 @@
 import { Request, Response, NextFunction } from 'express';
 import { StoreService } from '../services';
 import { logger } from '../utils/logger';
+import { z } from 'zod';
 
+// Schema
+const createStoreSchema = z.object({
+  storeId: z.string().min(1),
+  storeName: z.string().min(1),
+  storeUrl: z.string().min(1),
+});
+
+const getStoreSchema = z.object({
+  storeId: z.string().min(1),
+});
+
+const getStoresSchema = z.object({
+  skip: z.string().optional(),
+  limit: z.string().optional(),
+});
+
+const updateStoreSchema = z.object({
+  storeId: z.string().min(1),
+  chatApiKey: z.string().optional(),
+  workflowApiKey: z.string().optional(),
+  systemPrompt: z.string().optional(),
+  storePrompt: z.string().optional(),
+  iconUrl: z.string().optional(),
+  tone: z.string().optional(),
+  blockingKeywords: z.string().optional(),
+  datasetId: z.string().optional(),
+  chatColor: z.string().optional(),
+  faqContent: z.string().optional(),
+  metaFieldDescription: z.string().optional(),
+});
+
+
+// Controller
 export class StoreController {
   private storeService: StoreService;
 
@@ -11,11 +45,9 @@ export class StoreController {
 
   public createStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      if (!req.body.storeId) {
-        return res.status(400).json({ error: 'storeId is required' });
-      }
+      const validatedData = createStoreSchema.parse(req.body);
 
-      const store = await this.storeService.createStore(req.body);
+      const store = await this.storeService.createStore(validatedData);
       logger.info(`Store created with ID: ${store.id}`);
       res.status(201).json(store);
     } catch (error) {
@@ -29,7 +61,8 @@ export class StoreController {
 
   public getStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const store = await this.storeService.getStore(req.params.storeId);
+      const validatedData = getStoreSchema.parse(req.params);
+      const store = await this.storeService.getStore(validatedData.storeId);
       if (!store) {
         return res.status(404).json({ error: 'Store not found' });
       }
@@ -42,8 +75,9 @@ export class StoreController {
 
   public getStores = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const skip = parseInt(req.query.skip as string) || 0;
-      const limit = parseInt(req.query.limit as string) || 100;
+      const validatedData = getStoresSchema.parse(req.query);
+      const skip = parseInt(validatedData.skip as string) || 0;
+      const limit = parseInt(validatedData.limit as string) || 100;
       const stores = await this.storeService.getStores(skip, limit);
       res.json(stores);
     } catch (error) {
@@ -54,7 +88,12 @@ export class StoreController {
 
   public updateStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const store = await this.storeService.updateStore(req.params.storeId, req.body);
+      const storeId = req.params.storeId;
+      if(!storeId){
+        return res.status(400).json({ error: 'storeId is required' });
+      }
+      const validatedData = updateStoreSchema.parse(req.body);
+      const store = await this.storeService.updateStore(storeId, validatedData);
       res.json(store);
     } catch (error) {
       logger.error('Error updating store:', error);
